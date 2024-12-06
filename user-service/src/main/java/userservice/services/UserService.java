@@ -1,5 +1,6 @@
 package userservice.services;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import userservice.entities.User;
@@ -8,7 +9,7 @@ import userservice.repositories.UserRepository;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
 
