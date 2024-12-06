@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -17,24 +16,16 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @EnableWebSecurity
 @CrossOrigin("*")
 public class SecurityConfig {
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable) // Disable CSRF protection (optional, can be kept if needed)
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/swagger-ui/**",          // Swagger UI
-                                "/v3/api-docs/**",         // OpenAPI docs
-                                "/swagger-ui.html",        // Swagger UI entry point
-                                "/swagger-resources/**",   // Swagger resources
-                                "/webjars/**"              // Webjar resources like Swagger UI assets
-                        ).permitAll()
-                                .requestMatchers("/swagger-ui/**").permitAll()
-                        .requestMatchers("/v3/**").permitAll()// Allow access to Swagger UI and docs
-//                        .anyRequest().authenticated()  // Require authentication for all other requests
+                        .requestMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll()
+                        .requestMatchers("/api/v1/**").permitAll()
+                        .anyRequest().authenticated()
                 )
-                .formLogin(AbstractHttpConfigurer::disable); // Disable default login page
+                .formLogin(AbstractHttpConfigurer::disable);
 
         return http.build();
     }
@@ -46,7 +37,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(12); // Use BCrypt for password hashing
+        return new BCryptPasswordEncoder(12);
     }
 
 }
