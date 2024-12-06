@@ -1,6 +1,7 @@
 package userservice.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,8 +12,7 @@ import userservice.services.CustomerService;
 
 @RestController
 @RequestMapping("/api/v1/customer")
-@RequiredArgsConstructor
-@CrossOrigin
+@AllArgsConstructor
 public class CustomerController {
     private final CustomerService customerService;
 
@@ -23,7 +23,7 @@ public class CustomerController {
         try{
             return ResponseEntity.ok(customerService.getAllCustomers());
         }catch (Exception e) {
-            return badRequest("failed in: /getAllCustomers");
+            return badRequest("/getAllCustomers");
         }
     }
 
@@ -33,11 +33,11 @@ public class CustomerController {
         try {
             return ResponseEntity.ok(customerService.createCustomer(createCustomerDto));
         } catch (Exception e) {
-            return badRequest("failed in: /createCustomer");
+            return badRequest("/createCustomer");
         }
     }
 
     private ResponseEntity<?> badRequest(String message) {
-        return ResponseEntity.badRequest().body(message);
+        return ResponseEntity.badRequest().body("failed in: " + message);
     }
 }

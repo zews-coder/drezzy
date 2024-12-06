@@ -17,8 +17,8 @@ public class BootstrapData implements CommandLineRunner {
         if (userRepository.count() == 0) {
             User user = new User();
             user.setUsername("admin");
-            user.setPassword("admin");
             user.setEmail("admin@admin.com");
+            user.setPassword("admin");
             user.setRole(Role.ADMIN);
             userRepository.save(user);
         }

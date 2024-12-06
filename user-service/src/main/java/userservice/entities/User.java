@@ -1,24 +1,22 @@
 package userservice.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.io.Serializable;
 
 @Entity
 @Data
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Email
     private String email;
     private String username;
     private String password;

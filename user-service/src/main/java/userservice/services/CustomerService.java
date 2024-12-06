@@ -22,19 +22,21 @@ public class CustomerService {
     }
 
     public List<Customer> getAllCustomers() {
-        return new ArrayList<>(customerRepository.findAll());
+        return new ArrayList<Customer>(customerRepository.findAll());
     }
 
     public Customer createCustomer(CreateCustomerDto createCustomerDto) {
         Customer customer = new Customer();
+        customer.setEmail(createCustomerDto.getEmail());
         customer.setUsername(createCustomerDto.getUsername());
         customer.setPassword(createCustomerDto.getPassword());
-        customer.setEmail(createCustomerDto.getEmail());
+        customer.setRole(Role.CUSTOMER);
+        customer.setIsActive(true);
         customer.setFirstName(createCustomerDto.getFirstName());
         customer.setLastName(createCustomerDto.getLastName());
         customer.setPhoneNumber(createCustomerDto.getPhoneNumber());
-        customer.setRole(Role.CUSTOMER);
         customer.setAddress(createCustomerDto.getAddress());
+        customer.setCardNumber(createCustomerDto.getCardNumber());
         return customerRepository.save(customer);
     }
 
