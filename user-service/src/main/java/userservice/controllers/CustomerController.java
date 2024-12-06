@@ -1,5 +1,6 @@
 package userservice.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,11 +12,13 @@ import userservice.services.CustomerService;
 @RestController
 @RequestMapping("/api/v1/customer")
 @RequiredArgsConstructor
+@CrossOrigin
 public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping(value = "/getAll",
             produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "prvi", description = "opis prvog")
     public ResponseEntity<?> getAllCustomers() {
         try{
             return ResponseEntity.ok(customerService.getAllCustomers());

@@ -14,17 +14,17 @@ import java.util.Map;
 public class JwtUtils {
     private final String SECRET_KEY = "drezzy secret";
 
-    public Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
-    }
-
-    public String extractUsername(String token) {
-        return extractAllClaims(token).getSubject();
-    }
-
-    public boolean isTokenExpired(String token) {
-        return extractAllClaims(token).getExpiration().before(new Date());
-    }
+//    public Claims extractAllClaims(String token) {
+//        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+//    }
+//
+//    public String extractUsername(String token) {
+//        return extractAllClaims(token).getSubject();
+//    }
+//
+//    public boolean isTokenExpired(String token) {
+//        return extractAllClaims(token).getExpiration().before(new Date());
+//    }
 
 //    public String generateToken(AuthenticationDetails authenticationDetails) {
 //        Map<String, Object> claims = new HashMap<>();
