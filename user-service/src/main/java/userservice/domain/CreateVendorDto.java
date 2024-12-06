@@ -15,6 +15,5 @@ public class CreateVendorDto implements Serializable {
     private String password;
     private String vendorName;
     private String bankAccount;
-    private String owner;
     private String pib;
 }
