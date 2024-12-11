@@ -1,6 +1,9 @@
 package userservice.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import userservice.domain.CreateVendorDto;
 import userservice.entities.Role;
@@ -13,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class VendorService {
+public class VendorService{
     private final VendorRepository vendorRepository;
 
     public Vendor getVendorByEmail(String email) {

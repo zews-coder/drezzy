@@ -20,6 +20,7 @@ public class BootstrapData implements CommandLineRunner {
             user.setEmail("admin@admin.com");
             user.setPassword("admin");
             user.setRole(Role.ADMIN);
+            user.setIsActive(true);
             userRepository.save(user);
         }
     }

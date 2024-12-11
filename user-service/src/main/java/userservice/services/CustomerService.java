@@ -1,6 +1,9 @@
 package userservice.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import userservice.domain.CreateCustomerDto;
 import userservice.entities.Customer;
@@ -13,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class CustomerService {
+public class CustomerService{
     private final CustomerRepository customerRepository;
 
     public Customer getCustomerByEmail(String email) {
@@ -39,6 +42,7 @@ public class CustomerService {
         customer.setCardNumber(createCustomerDto.getCardNumber());
         return customerRepository.save(customer);
     }
+
 
     //change customer
 
