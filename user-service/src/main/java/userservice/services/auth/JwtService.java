@@ -1,4 +1,4 @@
-package userservice.services;
+package userservice.services.auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -21,39 +21,36 @@ public class JwtService {
     private final String secretKey;
 
     public JwtService() throws NoSuchAlgorithmException {
-        KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
+        KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA512");
         SecretKey key = keyGen.generateKey();
         this.secretKey = Base64.getEncoder().encodeToString(key.getEncoded());
     }
 
     private SecretKey getKey(){
-        byte[] keyBytes = Base64.getDecoder().decode(secretKey);
-        return Keys.hmacShaKeyFor(keyBytes);
+        return Keys.hmacShaKeyFor(Base64.getDecoder().decode(secretKey));
     }
 
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<String, Object>();
-        claims.put("claim", "CLAIM");
+        claims.put("id", user.getId());
+        claims.put("username", user.getUsername());
+        claims.put("role", user.getRole());
 
         return Jwts.builder()
-                .claims(claims)
                 .subject(user.getEmail())
+                .claims(claims)
                 .issuedAt(Date.from(Instant.now()))
-                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 10))    //10 minuts jwt
+                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 10))    //10 minutes jwt
                 .signWith(getKey())
                 .compact();
     }
 
-
     public Claims extractAllClaims(String token) {
-        return Jwts.parser().verifyWith(getKey()).build()
-                .parseSignedClaims(token).getPayload();
+        return Jwts.parser().verifyWith(getKey()).build().parseSignedClaims(token).getPayload();
     }
 
-    public String extractEmail(String token) {
-        Claims claims = extractAllClaims(token);
-        String email = claims.getSubject();
-        return email;
+    public String extractSubject(String token) {
+        return extractAllClaims(token).getSubject();
     }
 
     public boolean isTokenExpired(String token) {
@@ -61,7 +58,6 @@ public class JwtService {
     }
 
     public boolean validateToken(String jwtToken, UserDetails userDetails) {
-        final String email = extractEmail(jwtToken);
-        return email.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken);
+        return extractSubject(jwtToken).equals(userDetails.getUsername()) && !isTokenExpired(jwtToken);
     }
 }

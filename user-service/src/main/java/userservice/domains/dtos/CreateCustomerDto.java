@@ -1,15 +1,15 @@
-package userservice.domain;
+package userservice.domains.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import userservice.interfaces.MyDto;
 
-import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateCustomerDto implements Serializable {
+public class CreateCustomerDto implements MyDto {
     private String username;
     private String email;
     private String password;

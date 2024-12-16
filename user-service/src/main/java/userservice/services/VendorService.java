@@ -1,13 +1,15 @@
 package userservice.services;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import userservice.domain.CreateVendorDto;
+import userservice.domains.dtos.CreateVendorMyDto;
+import userservice.entities.Customer;
 import userservice.entities.Role;
+import userservice.entities.User;
 import userservice.entities.Vendor;
+import userservice.interfaces.MyDto;
+import userservice.interfaces.MyEntity;
+import userservice.interfaces.MyService;
 import userservice.repositories.VendorRepository;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class VendorService{
+public class VendorService implements MyService {
     private final VendorRepository vendorRepository;
 
     public Vendor getVendorByEmail(String email) {
@@ -28,7 +30,7 @@ public class VendorService{
         return new ArrayList<Vendor>(vendorRepository.findAll());
     }
 
-    public Vendor createVendor(CreateVendorDto createVendorDto) {
+    public Vendor createVendor(CreateVendorMyDto createVendorDto) {
         Vendor vendor = new Vendor();
         vendor.setEmail(createVendorDto.getEmail());
         vendor.setUsername(createVendorDto.getUsername());
@@ -39,5 +41,45 @@ public class VendorService{
         vendor.setBankAccount(createVendorDto.getBankAccount());
         vendor.setPib(createVendorDto.getPib());
         return vendorRepository.save(vendor);
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public List<MyEntity> get() {
+        return List.of();
+    }
+
+    @Override
+    public User add(MyDto myDto) {
+        return null;
+    }
+
+    @Override
+    public User update(MyDto myDto) {
+        return null;
+    }
+
+    @Override
+    public void activate(Long id) {
+
+    }
+
+    @Override
+    public void deactivate(Long id) {
+
+    }
+
+    @Override
+    public void delete(Long id) {
+
+    }
+
+    @Override
+    public void empty() {
+
     }
 }

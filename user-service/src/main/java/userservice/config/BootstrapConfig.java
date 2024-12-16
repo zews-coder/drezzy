@@ -1,4 +1,4 @@
-package userservice.bootstrap;
+package userservice.config;
 
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -10,19 +10,21 @@ import userservice.repositories.UserRepository;
 
 @Component
 @AllArgsConstructor
-public class BootstrapData implements CommandLineRunner {
+public class BootstrapConfig implements CommandLineRunner {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
+
         if (userRepository.count() == 0) {
             User user = new User();
-            user.setUsername("admin");
             user.setEmail("admin@admin.com");
+            user.setUsername("admin");
             user.setPassword(passwordEncoder.encode("admin"));
             user.setRole(Role.ADMIN);
             user.setIsActive(true);
+
             userRepository.save(user);
         }
     }

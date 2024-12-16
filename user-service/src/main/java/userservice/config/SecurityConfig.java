@@ -1,6 +1,5 @@
 package userservice.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,19 +15,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import userservice.services.MyUserDetailsService;
+import userservice.services.auth.MyUserDetailsService;
 import userservice.services.UserService;
-import userservice.domain.filters.JwtFilter;
+import userservice.domains.filters.JwtFilter;
 
 @Configuration
-@CrossOrigin("*")
 @EnableWebSecurity
 public class SecurityConfig {
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private JwtFilter jwtFilter;
+    private final UserService userService;
+    private final JwtFilter jwtFilter;
+
+    public SecurityConfig(UserService userService, JwtFilter jwtFilter) {
+        this.userService = userService;
+        this.jwtFilter = jwtFilter;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -38,9 +38,11 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/v1/**").permitAll()  //TODO: obrisati kasnije
                         .requestMatchers("/auth/user").permitAll()
+                        .requestMatchers("/auth/customer").permitAll()
+                        .requestMatchers("/auth/vendor").permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin(AbstractHttpConfigurer::disable);
 

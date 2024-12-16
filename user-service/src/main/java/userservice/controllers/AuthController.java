@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import userservice.domain.JwtDto;
-import userservice.domain.LoginDto;
+import userservice.domains.JwtDto;
+import userservice.domains.LoginDto;
 import userservice.services.CustomerService;
-import userservice.services.JwtService;
+import userservice.services.auth.JwtService;
 import userservice.services.UserService;
 import userservice.services.VendorService;
 
@@ -39,21 +39,36 @@ public class AuthController {
         }catch (Exception e){
             return ResponseEntity.badRequest().build();
         }
-
-        return ResponseEntity.ok(new JwtDto(jwtService.generateToken(userService.getUserByEmail(loginDto.getEmail()))));
+        return ResponseEntity.ok(new JwtDto(jwtService.generateToken(userService.getByEmail(loginDto.getEmail()))));
     }
 
-    //login customer
     @PostMapping(path = "/customer",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Customer login route", description = "proba")
     public ResponseEntity<?> customerLogin(@RequestBody LoginDto loginDto){
-        return null;
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    loginDto.getEmail(),
+                    loginDto.getPassword()));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(new JwtDto(jwtService.generateToken(customerService.getByEmail(loginDto.getEmail()))));
     }
 
-    //login vendor
-    @PostMapping("/vendor")
+    @PostMapping(path = "/vendor",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Vendor login route", description = "proba")
     public ResponseEntity<?> vendorLogin(@RequestBody LoginDto loginDto){
-        return null;
+        try {
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    loginDto.getEmail(),
+                    loginDto.getPassword()));
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(new JwtDto(jwtService.generateToken(vendorService.getVendorByEmail(loginDto.getEmail()))));
     }
 }

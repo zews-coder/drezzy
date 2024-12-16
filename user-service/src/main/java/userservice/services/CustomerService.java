@@ -1,13 +1,14 @@
 package userservice.services;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import userservice.domain.CreateCustomerDto;
+import userservice.domains.dtos.CreateCustomerDto;
 import userservice.entities.Customer;
 import userservice.entities.Role;
+import userservice.entities.User;
+import userservice.interfaces.MyDto;
+import userservice.interfaces.MyEntity;
+import userservice.interfaces.MyService;
 import userservice.repositories.CustomerRepository;
 
 import java.util.ArrayList;
@@ -16,17 +17,8 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class CustomerService{
+public class CustomerService implements MyService {
     private final CustomerRepository customerRepository;
-
-    public Customer getCustomerByEmail(String email) {
-        Optional<Customer> customer = customerRepository.findByEmail(email);
-        return customer.orElse(null);
-    }
-
-    public List<Customer> getAllCustomers() {
-        return new ArrayList<Customer>(customerRepository.findAll());
-    }
 
     public Customer createCustomer(CreateCustomerDto createCustomerDto) {
         Customer customer = new Customer();
@@ -43,10 +35,44 @@ public class CustomerService{
         return customerRepository.save(customer);
     }
 
+    @Override
+    public User getByEmail(String email) {
+        Optional<Customer> customer = customerRepository.findByEmail(email);
+        return customer.orElse(null);
+    }
 
-    //change customer
+    @Override
+    public List<MyEntity> get() {
+        return new ArrayList<>(customerRepository.findAll());
+    }
 
-    //deactivate customer
+    @Override
+    public User add(MyDto myDto) {
+        return null;
+    }
 
-    //delete customer
+    @Override
+    public User update(MyDto myDto) {
+        return null;
+    }
+
+    @Override
+    public void activate(Long id) {
+
+    }
+
+    @Override
+    public void deactivate(Long id) {
+
+    }
+
+    @Override
+    public void delete(Long id) {
+        customerRepository.deleteById(id);
+    }
+
+    @Override
+    public void empty() {
+        customerRepository.deleteAll();
+    }
 }
