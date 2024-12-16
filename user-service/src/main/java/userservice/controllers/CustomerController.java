@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import userservice.domains.dtos.CreateCustomerDto;
 import userservice.interfaces.MyController;
 import userservice.interfaces.MyDto;
 import userservice.services.CustomerService;
@@ -27,25 +28,23 @@ public class CustomerController implements MyController {
         }
     }
 
-    @Override
     @PostMapping(path = "/createOne",
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Create new Customer")
-    public ResponseEntity<?> createOne(@RequestBody MyDto myDto) {
+    public ResponseEntity<?> createOne(@RequestBody CreateCustomerDto createCustomerDto) {
         try {
-            return ResponseEntity.ok(customerService.add(myDto));
+            return ResponseEntity.ok(customerService.add(createCustomerDto));
         } catch (Exception e) {
             return badRequest("/createOne");
         }
     }
 
-    @Override
     @PutMapping(path = "/updateOne",
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Update existing Customer")
-    public ResponseEntity<?> updateOne(@RequestBody MyDto myDto) {
+    public ResponseEntity<?> updateOne(@RequestBody CreateCustomerDto createCustomerDto) {
         try {
-            return ResponseEntity.ok(customerService.update(myDto));
+            return ResponseEntity.ok(customerService.update(createCustomerDto));
         } catch (Exception e) {
             return badRequest("/updateOne");
         }
@@ -91,7 +90,12 @@ public class CustomerController implements MyController {
     @DeleteMapping(path = "/deleteAll")
     @Operation(summary = "Delete all Customer")
     public ResponseEntity<?> deleteAll() {
-        return null;
+        try {
+            customerService.empty();
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return badRequest("/deleteAll");
+        }
     }
 
     @Override

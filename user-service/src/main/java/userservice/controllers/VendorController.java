@@ -1,10 +1,11 @@
 package userservice.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import userservice.domains.dtos.CreateVendorMyDto;
+import userservice.domains.dtos.CreateVendorDto;
 import userservice.interfaces.MyController;
 import userservice.interfaces.MyDto;
 import userservice.services.VendorService;
@@ -15,70 +16,86 @@ import userservice.services.VendorService;
 public class VendorController implements MyController {
     private final VendorService vendorService;
 
-    @GetMapping(value = "/getAll",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getAllVendors() {
-        try{
-            return ResponseEntity.ok(vendorService.getAllVendors());
-        }catch (Exception e){
-            return badRequest("/getAllVendors");
-        }
-    }
-
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createVendor(@RequestBody CreateVendorMyDto createVendorDto) {
-        try {
-            return ResponseEntity.ok(vendorService.createVendor(createVendorDto));
-        }catch (Exception e){
-            return badRequest("/createVendor");
-        }
-    }
-
     @Override
+    @GetMapping(path = "/getAll",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get all Vendors")
     public ResponseEntity<?> getAll() {
-        return null;
+        try {
+            return ResponseEntity.ok(vendorService.get());
+        } catch (Exception e) {
+            return badRequest("/getAll");
+        }
+    }
+
+    @PostMapping(path = "/createOne",
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Create new Customer")
+    public ResponseEntity<?> createOne(@RequestBody CreateVendorDto createVendorDto) {
+        try {
+            return ResponseEntity.ok(vendorService.add(createVendorDto));
+        } catch (Exception e) {
+            return badRequest("/createOne");
+        }
+    }
+
+    @PutMapping(path = "/updateOne",
+            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Update existing Customer")
+    public ResponseEntity<?> updateOne(@RequestBody CreateVendorDto createVendorDto) {
+        try {
+            return ResponseEntity.ok(vendorService.update(createVendorDto));
+        } catch (Exception e) {
+            return badRequest("/updateOne");
+        }
     }
 
     @Override
-    public ResponseEntity<?> createOne(MyDto myDto) {
-        if (myDto instanceof CreateVendorMyDto) {}
-        return null;
+    @PutMapping(path = "/activeOne/{id}")
+    @Operation(summary = "Activate Customer")
+    public ResponseEntity<?> activeOne(@PathVariable Long id) {
+        try {
+            vendorService.activate(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return badRequest("/activeOne");
+        }
     }
 
     @Override
-    public ResponseEntity<?> updateOne(MyDto myDto) {
-        return null;
-    }
-
-//    @Override
-//    public ResponseEntity<?> createOne(@RequestBody CreateVendorMyDto createVendorDto) {
-//        return null;
-//    }
-
-//    @Override
-//    public ResponseEntity<?> updateOne(MyDto myDto) {
-//        return null;
-//    }
-
-    @Override
-    public ResponseEntity<?> activeOne(Long id) {
-        return null;
+    @PutMapping(path = "/deactivateOne/{id}")
+    @Operation(summary = "Deactivate Customer")
+    public ResponseEntity<?> deactivateOne(@PathVariable Long id) {
+        try {
+            vendorService.deactivate(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return badRequest("/deactivateOne");
+        }
     }
 
     @Override
-    public ResponseEntity<?> deactivateOne(Long id) {
-        return null;
+    @DeleteMapping(path = "/deleteOne/{id}")
+    @Operation(summary = "Delete one Customer")
+    public ResponseEntity<?> deleteOne(@PathVariable Long id) {
+        try {
+            vendorService.delete(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return badRequest("/deleteOne");
+        }
     }
 
     @Override
-    public ResponseEntity<?> deleteOne(Long id) {
-        return null;
-    }
-
-    @Override
+    @DeleteMapping(path = "/deleteAll")
+    @Operation(summary = "Delete all Customer")
     public ResponseEntity<?> deleteAll() {
-        return null;
+        try {
+            vendorService.empty();
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return badRequest("/deleteAll");
+        }
     }
 
     @Override

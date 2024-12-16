@@ -11,12 +11,12 @@ public interface MyController {
     /**
     create new entity
      */
-    ResponseEntity<?> createOne(MyDto myDto);
+//    ResponseEntity<?> createOne(MyDto myDto);
 
     /**
     update existing entity
      */
-    ResponseEntity<?> updateOne(MyDto myDto);
+//    ResponseEntity<?> updateOne(MyDto myDto);
 
     /**
     activate entity with provided id

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import userservice.domains.JwtDto;
-import userservice.domains.LoginDto;
+import userservice.domains.dtos.JwtDto;
+import userservice.domains.dtos.LoginDto;
 import userservice.services.CustomerService;
 import userservice.services.auth.JwtService;
 import userservice.services.UserService;
@@ -69,6 +69,6 @@ public class AuthController {
         }catch (Exception e){
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(new JwtDto(jwtService.generateToken(vendorService.getVendorByEmail(loginDto.getEmail()))));
+        return ResponseEntity.ok(new JwtDto(jwtService.generateToken(vendorService.getByEmail(loginDto.getEmail()))));
     }
 }

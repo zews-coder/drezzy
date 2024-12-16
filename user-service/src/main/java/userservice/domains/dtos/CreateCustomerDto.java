@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import userservice.interfaces.MyDto;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

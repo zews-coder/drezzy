@@ -8,7 +8,7 @@ import userservice.interfaces.MyDto;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateVendorMyDto implements MyDto {
+public class CreateVendorDto implements MyDto {
     private String username;
     private String email;
     private String password;
