@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import userservice.domains.dtos.CreateCustomerDto;
 import userservice.interfaces.MyController;
-import userservice.interfaces.MyDto;
 import userservice.services.CustomerService;
 
 @RestController

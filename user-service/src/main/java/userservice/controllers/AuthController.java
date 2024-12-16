@@ -30,7 +30,7 @@ public class AuthController {
     @PostMapping(path = "/user",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "User login route", description = "proba")
+    @Operation(summary = "User login route")
     public ResponseEntity<?> userLogin(@RequestBody LoginDto loginDto){
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -45,7 +45,7 @@ public class AuthController {
     @PostMapping(path = "/customer",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Customer login route", description = "proba")
+    @Operation(summary = "Customer login route")
     public ResponseEntity<?> customerLogin(@RequestBody LoginDto loginDto){
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -60,7 +60,7 @@ public class AuthController {
     @PostMapping(path = "/vendor",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "Vendor login route", description = "proba")
+    @Operation(summary = "Vendor login route")
     public ResponseEntity<?> vendorLogin(@RequestBody LoginDto loginDto){
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(

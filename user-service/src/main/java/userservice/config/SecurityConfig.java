@@ -35,14 +35,16 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
+                                .requestMatchers("/swagger-ui").permitAll()
+                                .requestMatchers("/v3/api-docs").permitAll()
                         .requestMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll()
-                        .requestMatchers("/api/v1/**").permitAll()  //TODO: obrisati kasnije
+//                        .requestMatchers("/api/v1/**").permitAll()  //TODO: obrisati kasnije
                         .requestMatchers("/auth/user").permitAll()
                         .requestMatchers("/auth/customer").permitAll()
                         .requestMatchers("/auth/vendor").permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin(AbstractHttpConfigurer::disable);
 
