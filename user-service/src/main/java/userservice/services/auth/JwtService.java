@@ -39,8 +39,8 @@ public class JwtService {
         return Jwts.builder()
                 .subject(user.getEmail())
                 .claims(claims)
-                .issuedAt(Date.from(Instant.now()))
-                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 10))    //10 minutes jwt
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))    //10 minutes jwt
                 .signWith(getKey())
                 .compact();
     }

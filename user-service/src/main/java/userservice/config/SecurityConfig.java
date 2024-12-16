@@ -42,7 +42,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/vendor").permitAll()
                         .anyRequest().authenticated()
                 )
-//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin(AbstractHttpConfigurer::disable);
 
