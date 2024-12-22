@@ -1,4 +1,4 @@
-package userservice.domains.dtos;
+package userservice.utils.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class JwtDto implements Serializable {
-    private String token;
+public class LoginDto implements Serializable {
+    private String email;
+    private String password;
 }

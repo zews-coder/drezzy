@@ -1,13 +1,12 @@
-package zews.shoppingservice;
+package emailservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ShoppingServiceApplication {
+public class EmailServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ShoppingServiceApplication.class, args);
+        SpringApplication.run(EmailServiceApplication.class, args);
     }
-
 }

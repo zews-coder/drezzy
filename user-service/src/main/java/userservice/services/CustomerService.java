@@ -3,7 +3,7 @@ package userservice.services;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import userservice.domains.dtos.CreateCustomerDto;
+import userservice.utils.dtos.CreateCustomerDto;
 import userservice.entities.Customer;
 import userservice.entities.Role;
 import userservice.entities.User;

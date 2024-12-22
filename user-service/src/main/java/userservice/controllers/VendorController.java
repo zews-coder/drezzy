@@ -5,9 +5,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import userservice.domains.dtos.CreateVendorDto;
+import userservice.utils.dtos.CreateVendorDto;
 import userservice.interfaces.MyController;
-import userservice.interfaces.MyDto;
 import userservice.services.VendorService;
 
 @RestController

@@ -1,4 +1,4 @@
-package userservice.domains.dtos;
+package userservice.utils.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,11 +8,13 @@ import userservice.interfaces.MyDto;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateVendorDto implements MyDto {
+public class CreateCustomerDto implements MyDto {
     private String username;
     private String email;
     private String password;
-    private String vendorName;
-    private String bankAccount;
-    private String pib;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String address;
+    private String cardNumber;
 }

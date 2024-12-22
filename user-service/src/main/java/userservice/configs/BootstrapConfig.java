@@ -1,4 +1,4 @@
-package userservice.config;
+package userservice.configs;
 
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
