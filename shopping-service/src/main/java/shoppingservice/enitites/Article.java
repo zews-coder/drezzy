@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import shoppingservice.enitites.enums.Sex;
+import shoppingservice.interfaces.MyEntity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Article implements Serializable {
+public class Article implements MyEntity {
     @Id
     private Long id;
     private Long vendorId;

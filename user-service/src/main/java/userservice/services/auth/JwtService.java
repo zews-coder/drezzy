@@ -3,6 +3,7 @@ package userservice.services.auth;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import userservice.entities.User;
@@ -16,14 +17,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@AllArgsConstructor
 public class JwtService {
-    private final String secretKey;
-
-    public JwtService() throws NoSuchAlgorithmException {
-        KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA512");
-        SecretKey key = keyGen.generateKey();
-        this.secretKey = Base64.getEncoder().encodeToString(key.getEncoded());
-    }
+    private final String secretKey = "sBQ4tLJ7GswrYcT47TXlRoCl7WZmTL4No8YsX2aRf44bb6NpKwAdVAXcFHQTT0NN";
 
     private SecretKey getKey(){
         return Keys.hmacShaKeyFor(Base64.getDecoder().decode(secretKey));
