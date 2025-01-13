@@ -15,7 +15,7 @@ export class VendorLoginComponent {
     password: '',
   };
 
-  constructor(private http: HttpClient, router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   //login function
   onSubmit() {
@@ -26,7 +26,7 @@ export class VendorLoginComponent {
           // Save the token in session storage
           sessionStorage.setItem('token', response.token);
           console.log('Token saved to session storage:', response.token);
-          alert('Login successful!');
+          this.router.navigate(['/vendor-home']);
         } else {
           console.error('Token not found in response');
         }
