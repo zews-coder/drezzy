@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import shoppingservice.services.ClothesService;
 
-@RestController("/api/v1")
+@RestController
+@RequestMapping("/api/v1/clothes")
 @AllArgsConstructor
 public class ClothesController {
     private final ClothesService clothesService;

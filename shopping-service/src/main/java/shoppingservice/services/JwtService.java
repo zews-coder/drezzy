@@ -1,4 +1,4 @@
-package userservice.services.auth;
+package shoppingservice.services;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -6,14 +6,10 @@ import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import userservice.entities.User;
 
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -23,21 +19,6 @@ public class JwtService {
 
     private SecretKey getKey(){
         return Keys.hmacShaKeyFor(Base64.getDecoder().decode(secretKey));
-    }
-
-    public String generateToken(User user) {
-        Map<String, Object> claims = new HashMap<String, Object>();
-        claims.put("id", user.getId());
-        claims.put("username", user.getUsername());
-        claims.put("role", user.getRole());
-
-        return Jwts.builder()
-                .subject(user.getEmail())
-                .claims(claims)
-                .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-                .signWith(getKey())
-                .compact();
     }
 
     public Claims extractAllClaims(String token) {
@@ -50,7 +31,7 @@ public class JwtService {
 
     public Long extractId(String token) {
         Map<String, Object> claims = extractAllClaims(token);
-        return (Long) claims.get("id");
+        return Long.parseLong(claims.get("id").toString());
     }
 
     public boolean isTokenExpired(String token) {

@@ -29,7 +29,22 @@ public class BootstrapConfig implements CommandLineRunner {
             user.setPassword(passwordEncoder.encode("admin"));
             user.setRole(Role.ADMIN);
             user.setIsActive(true);
+//            user.setId(1);
             userRepository.save(user);
+        }
+
+        if (vendorRepository.count() == 0) {
+            Vendor vendor = new Vendor();
+            vendor.setEmail("vendor@test.com");
+            vendor.setUsername("test_vendor");
+            vendor.setPassword(passwordEncoder.encode("vendor"));
+            vendor.setRole(Role.VENDOR);
+            vendor.setIsActive(true);
+            vendor.setVendorName("Test vendor");
+            vendor.setPib("12345678");
+            vendor.setBankAccount("1111222");
+//            vendor.setId(2);
+            vendorRepository.save(vendor);
         }
 
         if (customerRepository.count() == 0) {
@@ -45,18 +60,6 @@ public class BootstrapConfig implements CommandLineRunner {
             customer.setCardNumber("12341234");
             customerRepository.save(customer);
         }
-
-        if (vendorRepository.count() == 0) {
-            Vendor vendor = new Vendor();
-            vendor.setEmail("vendor@test.com");
-            vendor.setUsername("test_vendor");
-            vendor.setPassword(passwordEncoder.encode("vendor"));
-            vendor.setRole(Role.VENDOR);
-            vendor.setIsActive(true);
-            vendor.setVendorName("Test vendor");
-            vendor.setPib("12345678");
-            vendor.setBankAccount("1111222");
-            vendorRepository.save(vendor);
-        }
     }
+
 }

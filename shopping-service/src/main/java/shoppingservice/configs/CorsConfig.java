@@ -1,4 +1,4 @@
-package userservice.configs;
+package shoppingservice.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

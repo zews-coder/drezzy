@@ -7,16 +7,18 @@ import lombok.NoArgsConstructor;
 import shoppingservice.enitites.enums.Sex;
 import shoppingservice.interfaces.MyEntity;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Article implements MyEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long vendorId;
     private String title;
@@ -26,8 +28,14 @@ public class Article implements MyEntity {
     private Integer discount;
     @Enumerated
     private Sex sex;
-    @ManyToMany()
-    private List<Tag> tagList;
-    private Boolean visible;
-    private String uuid;
+    private Boolean visible = true;
+//    @Column(nullable = false, unique = true)
+//    private String uuid;
+//
+//    @PrePersist
+//    public void prePersist() {
+//        if (uuid == null) {
+//            uuid = UUID.randomUUID().toString();
+//        }
+//    }
 }

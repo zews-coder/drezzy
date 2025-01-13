@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import shoppingservice.interfaces.MyDto;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class CreateClothesDto implements MyDto {
 }
