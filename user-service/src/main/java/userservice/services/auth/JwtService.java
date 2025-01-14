@@ -8,9 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import userservice.entities.User;
 
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
@@ -28,7 +26,6 @@ public class JwtService {
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<String, Object>();
         claims.put("id", user.getId());
-        claims.put("username", user.getUsername());
         claims.put("role", user.getRole());
 
         return Jwts.builder()

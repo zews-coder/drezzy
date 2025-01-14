@@ -5,20 +5,20 @@ import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import userservice.interfaces.MyEntity;
+
+import java.io.Serializable;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User implements MyEntity {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Email
     private String email;
-    private String username;
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;

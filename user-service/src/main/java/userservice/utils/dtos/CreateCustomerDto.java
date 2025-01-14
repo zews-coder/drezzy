@@ -3,12 +3,11 @@ package userservice.utils.dtos;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import userservice.interfaces.MyDto;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateCustomerDto implements MyDto {
+public class CreateCustomerDto {
     private String username;
     private String email;
     private String password;

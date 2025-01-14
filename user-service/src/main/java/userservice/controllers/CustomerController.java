@@ -6,16 +6,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import userservice.utils.dtos.CreateCustomerDto;
-import userservice.interfaces.MyController;
 import userservice.services.CustomerService;
 
 @RestController
 @RequestMapping("/api/v1/customer")
 @AllArgsConstructor
-public class CustomerController implements MyController {
+public class CustomerController {
     private final CustomerService customerService;
 
-    @Override
     @GetMapping(path = "/getAll",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Get all Customers")
@@ -49,7 +47,6 @@ public class CustomerController implements MyController {
         }
     }
 
-    @Override
     @PutMapping(path = "/activeOne/{id}")
     @Operation(summary = "Activate Customer")
     public ResponseEntity<?> activeOne(@PathVariable Long id) {
@@ -61,7 +58,6 @@ public class CustomerController implements MyController {
         }
     }
 
-    @Override
     @PutMapping(path = "/deactivateOne/{id}")
     @Operation(summary = "Deactivate Customer")
     public ResponseEntity<?> deactivateOne(@PathVariable Long id) {
@@ -73,7 +69,6 @@ public class CustomerController implements MyController {
         }
     }
 
-    @Override
     @DeleteMapping(path = "/deleteOne/{id}")
     @Operation(summary = "Delete one Customer")
     public ResponseEntity<?> deleteOne(@PathVariable Long id) {
@@ -85,7 +80,6 @@ public class CustomerController implements MyController {
         }
     }
 
-    @Override
     @DeleteMapping(path = "/deleteAll")
     @Operation(summary = "Delete all Customer")
     public ResponseEntity<?> deleteAll() {
@@ -97,7 +91,6 @@ public class CustomerController implements MyController {
         }
     }
 
-    @Override
     public ResponseEntity<?> badRequest(String message) {
         return ResponseEntity.badRequest().body("failed in: " + message);
     }
