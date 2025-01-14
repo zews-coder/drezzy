@@ -47,7 +47,7 @@ public class JwtService {
 
     public Long extractId(String token) {
         Map<String, Object> claims = extractAllClaims(token);
-        return (Long) claims.get("id");
+        return Long.parseLong(claims.get("id").toString());
     }
 
     public boolean isTokenExpired(String token) {

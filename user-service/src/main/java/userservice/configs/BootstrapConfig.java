@@ -29,19 +29,31 @@ public class BootstrapConfig implements CommandLineRunner {
             userRepository.save(user);
         }
 
+        //two customers
         if (customerRepository.count() == 0) {
-            Customer customer = new Customer();
-            customer.setEmail("customer@test.com");
-            customer.setUsername("test_customer");
-            customer.setPassword(passwordEncoder.encode("customer"));
-            customer.setRole(Role.CUSTOMER);
-            customer.setIsActive(true);
-            customer.setFirstName("John");
-            customer.setLastName("Smith");
-            customer.setAddress("Jasenicka");
-            customer.setCardNumber("12341234");
-            customerRepository.save(customer);
+            Customer customer1 = new Customer();
+            customer1.setEmail("customer1@gmail.com");
+            customer1.setUsername("customer1");
+            customer1.setPassword(passwordEncoder.encode("customer1"));
+            customer1.setRole(Role.CUSTOMER);
+            customer1.setIsActive(true);
+            customer1.setFirstName("Djoko");
+            customer1.setLastName("Cvarkov");
+            customer1.setAddress("Peicevi Salasi");
+            customer1.setCardNumber("12341234");
+            customerRepository.save(customer1);
+
+            Customer customer2 = new Customer();
+            customer2.setEmail("customer2@gmail.com");
+            customer2.setUsername("customer2");
+            customer2.setPassword(passwordEncoder.encode("customer2"));
+            customer2.setRole(Role.CUSTOMER);
+            customer2.setIsActive(true);
+            customer2.setFirstName("Dragan");
+            customer2.setLastName("Torbica");
+            customer2.setAddress("Laze Stajica");
+            customer2.setCardNumber("56785678");
+            customerRepository.save(customer2);
         }
     }
-
 }

@@ -22,11 +22,9 @@ import userservice.utils.filters.JwtFilter;
 @EnableWebSecurity
 public class SecurityConfig {
     private final UserService userService;
-    private final JwtFilter jwtFilter;
 
-    public SecurityConfig(UserService userService, JwtFilter jwtFilter) {
+    public SecurityConfig(UserService userService) {
         this.userService = userService;
-        this.jwtFilter = jwtFilter;
     }
 
     @Bean
@@ -34,16 +32,12 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/swagger-ui").permitAll()
-                                .requestMatchers("/v3/api-docs").permitAll()
+                        .requestMatchers("/swagger-ui").permitAll()
+                        .requestMatchers("/v3/api-docs").permitAll()
                         .requestMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll()
-//                        .requestMatchers("/api/v1/**").permitAll()  //TODO: obrisati kasnije
-                        .requestMatchers("/auth/user").permitAll()
-                        .requestMatchers("/auth/customer").permitAll()
-                        .requestMatchers("/auth/vendor").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
-//                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin(AbstractHttpConfigurer::disable);
 
