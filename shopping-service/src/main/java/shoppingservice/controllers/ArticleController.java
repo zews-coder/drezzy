@@ -16,14 +16,16 @@ public class ArticleController{
     private final ArticleService articleService;
     private final JwtService jwtService;
 
-    @GetMapping(path = "/getAllArticlesFromVendor")
-    public ResponseEntity<?> getAllArticlesFromVendor(@RequestHeader("Authorization") String authorizationHeader){
+    @GetMapping(path = "/getAllArticles")
+    public ResponseEntity<?> getAllArticles(@RequestHeader("Authorization") String authorizationHeader){
         try{
-            String token = authorizationHeader.substring(7);
-            Long vendorId = jwtService.extractId(token);
-            return ResponseEntity.ok(articleService.getAllArticlesByVendor(vendorId));
+            String role = jwtService.extractRole(authorizationHeader.substring(7));
+            if (role.equalsIgnoreCase("admin")) {
+                return ResponseEntity.ok(articleService.getAllArticles());
+            }
+            return ResponseEntity.badRequest().body("/getAllArticles went wrong");
         }catch (Exception e){
-            return ResponseEntity.badRequest().body("/getAllArticlesFromVendor went wrong");
+            return ResponseEntity.badRequest().body("/getAllArticles went wrong");
         }
     }
 }

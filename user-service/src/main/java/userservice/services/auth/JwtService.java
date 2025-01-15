@@ -45,11 +45,6 @@ public class JwtService {
         return extractAllClaims(token).getSubject();
     }
 
-    public Long extractId(String token) {
-        Map<String, Object> claims = extractAllClaims(token);
-        return Long.parseLong(claims.get("id").toString());
-    }
-
     public boolean isTokenExpired(String token) {
         return extractAllClaims(token).getExpiration().before(new Date());
     }

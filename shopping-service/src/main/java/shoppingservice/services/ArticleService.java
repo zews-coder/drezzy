@@ -12,7 +12,7 @@ import java.util.List;
 public class ArticleService {
     private final ArticleRepository articleRepository;
 
-    public List<Article> getAllArticlesByVendor(Long vendorId) {
-        return this.articleRepository.findByVendorId(vendorId);
+    public List<Article> getAllArticles() {
+        return this.articleRepository.findAll();
     }
 }

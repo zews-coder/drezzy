@@ -34,6 +34,11 @@ public class JwtService {
         return Long.parseLong(claims.get("id").toString());
     }
 
+    public String extractRole(String token) {
+        Map<String, Object> claims = extractAllClaims(token);
+        return claims.get("role").toString();
+    }
+
     public boolean isTokenExpired(String token) {
         return extractAllClaims(token).getExpiration().before(new Date());
     }

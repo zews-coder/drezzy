@@ -20,6 +20,7 @@ public class BootstrapConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         //creating admin
+
         if (userRepository.findByRole(Role.ADMIN).stream().findAny().isEmpty()) {
             User user = new User();
             user.setEmail("admin@gmail.com");
