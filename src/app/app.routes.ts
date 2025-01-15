@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
 import { HomePageComponent } from './components/customer/home-page/home-page.component';
 import { CustomerLoginComponent } from './components/customer/customer-login/customer-login.component';
+
 import { VendorLoginComponent } from './components/vendor/vendor-login/vendor-login.component';
 import { VendorHomeComponent } from './components/vendor/vendor-home/vendor-home.component';
 import { VendorArticlesComponent } from './components/vendor/vendor-articles/vendor-articles.component';
@@ -18,6 +19,7 @@ export const routes: Routes = [
         path: "customer-login",
         component: CustomerLoginComponent
     },
+    
     {
         path: "vendor-login",
         component: VendorLoginComponent
@@ -27,7 +29,7 @@ export const routes: Routes = [
         component: VendorHomeComponent
     },
     {
-        path: "vendor-article",
+        path: "vendor-articles",
         component: VendorArticlesComponent
     },
     {

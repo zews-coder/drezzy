@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home-page',
-  imports: [RouterModule],
+  selector: 'app-customer-home',
   templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.css'
+  styleUrls: ['./home-page.component.css'],
 })
 export class HomePageComponent {
-  
+  constructor(private router: Router) {}
+
+  navigateToVendorLogin() {
+    this.router.navigate(['/vendor-login']);
+  }
 }
+

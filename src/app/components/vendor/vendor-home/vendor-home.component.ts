@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-vendor-home',
-  imports: [],
   templateUrl: './vendor-home.component.html',
-  styleUrl: './vendor-home.component.css'
+  styleUrls: ['./vendor-home.component.css'],
+  imports: [RouterModule],
 })
 export class VendorHomeComponent {
 

@@ -19,13 +19,11 @@ export class VendorLoginComponent {
 
   //login function
   onSubmit() {
-    const url = 'http://localhost:8080/auth/vendor';
+    const url = 'http://localhost:8080/auth/user';
     this.http.post<{ token: string }>(url, this.loginData).subscribe({
       next: (response) => {
         if (response.token) {
-          // Save the token in session storage
           sessionStorage.setItem('token', response.token);
-          console.log('Token saved to session storage:', response.token);
           this.router.navigate(['/vendor-home']);
         } else {
           console.error('Token not found in response');
