@@ -1,5 +1,6 @@
 package shoppingservice.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import shoppingservice.services.ArticleService;
 import shoppingservice.services.JwtService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/articles")
 @AllArgsConstructor
@@ -17,6 +21,7 @@ public class ArticleController{
     private final JwtService jwtService;
 
     @GetMapping(path = "/getAllArticles")
+    @Operation(summary = "getting all articles in DB")
     public ResponseEntity<?> getAllArticles(@RequestHeader("Authorization") String authorizationHeader){
         try{
             String role = jwtService.extractRole(authorizationHeader.substring(7));
@@ -28,4 +33,5 @@ public class ArticleController{
             return ResponseEntity.badRequest().body("/getAllArticles went wrong");
         }
     }
+
 }
