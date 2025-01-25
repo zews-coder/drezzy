@@ -22,7 +22,7 @@ public class ClothesService {
         articleClothes.setPrice(createClothesDto.getPrice());
         articleClothes.setDiscount(createClothesDto.getDiscount());
         articleClothes.setSex(Sex.valueOf(createClothesDto.getSex().toString()));
-        articleClothes.setSubtype(SubtypeClothes.valueOf(createClothesDto.getSubtype().toString()));
+        articleClothes.setSubtype(SubtypeClothes.valueOf(createClothesDto.getSubtype_clothes().toString()));
         articleClothes.setSize(createClothesDto.getSize());
         articleClothes.setCreationDate(new Date());
         return clothesRepository.save(articleClothes);

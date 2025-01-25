@@ -41,7 +41,6 @@ public class JwtService {
 
     public boolean isAdmin(String token) {
         Map<String, Object> claims = extractAllClaims(token);
-        System.out.println(claims.get("role").toString().toUpperCase());
         return claims.get("role").toString().equalsIgnoreCase("admin");
     }
 

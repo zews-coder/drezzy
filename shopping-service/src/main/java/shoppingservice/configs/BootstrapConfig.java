@@ -17,7 +17,6 @@ public class BootstrapConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        clothesRepository.deleteAll();
 
         if (clothesRepository.count() == 0) {
             ArticleClothes articleClothes1 = new ArticleClothes();

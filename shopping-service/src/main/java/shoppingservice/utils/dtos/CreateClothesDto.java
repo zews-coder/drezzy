@@ -19,6 +19,6 @@ public class CreateClothesDto implements Serializable {
     private Double price;
     private Integer discount;
     private Sex sex;
-    private SubtypeClothes subtype;
+    private SubtypeClothes subtype_clothes;
     private String size;
 }
