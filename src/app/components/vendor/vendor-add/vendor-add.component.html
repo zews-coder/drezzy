@@ -1,2 +1,72 @@
 <app-vendor-home></app-vendor-home>
-<p>vendor-add works!</p>
+<div class="container">
+    <!-- First Form (Shoes) -->
+    <form [formGroup]="vendorFormShoes" (ngSubmit)="onSubmitShoes()">
+      <div class="form-group">
+        <label for="titleShoes">Add Shoes</label>
+        <input type="text" id="titleShoes" formControlName="title" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="descriptionShoes">Description</label>
+        <textarea id="descriptionShoes" formControlName="description" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="priceShoes">Price</label>
+        <input type="text" id="priceShoes" formControlName="price" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="sizeShoes">Size</label>
+        <input type="text" id="sizeShoes" formControlName="size" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="subtypeShoes">Subtype Shoes</label>
+        <select id="subtypeShoes" formControlName="subtype_shoes" class="form-control">
+          <option *ngFor="let subtype_shoes of subtype_shoes" [value]="subtype_shoes">{{ subtype_shoes }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="sexShoes">Sex</label>
+        <select id="sexShoes" formControlName="sex" class="form-control">
+          <option *ngFor="let sex of sexes" [value]="sex">{{ sex }}</option>
+        </select>
+      </div>
+      <button type="submit" [disabled]="!vendorFormShoes.valid" class="btn btn-primary">Submit Shoes</button>
+    </form>
+  
+    <!-- Second Form (Clothes) -->
+    <form [formGroup]="vendorFormClothes" (ngSubmit)="onSubmitClothes()">
+      <div class="form-group">
+        <label for="titleClothes">Add Clothes</label>
+        <input type="text" id="titleClothes" formControlName="title" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="descriptionClothes">Description</label>
+        <textarea id="descriptionClothes" formControlName="description" class="form-control"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="priceClothes">Price</label>
+        <input type="text" id="priceClothes" formControlName="price" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="sizeClothes">Size</label>
+        <select id="subtypeClothes" formControlName="size" class="form-control">
+          <option *ngFor="let size_clothes of size_clothes" [value]="size_clothes">{{ size_clothes }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="subtypeClothes">Subtype Clothes</label>
+        <select id="subtypeClothes" formControlName="subtype_clothes" class="form-control">
+          <option *ngFor="let subtype_clothes of subtype_clothes" [value]="subtype_clothes">{{ subtype_clothes }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="sexClothes">Sex</label>
+        <select id="sexClothes" formControlName="sex" class="form-control">
+          <option *ngFor="let sex of sexes" [value]="sex">{{ sex }}</option>
+        </select>
+      </div>
+      <button type="submit" [disabled]="!vendorFormClothes.valid" class="btn btn-primary">Submit Clothes</button>
+    </form>
+  </div>
+  
+  
