@@ -1,2 +1,54 @@
 <app-vendor-home></app-vendor-home>
-<p>vendor-orders works!</p>
+<div class="table-container">
+    <table class="bill-table">
+      <thead>
+        <tr>
+          <th>Bill ID</th>
+          <th>Customer ID</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Price</th>
+          <th>Actions</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bill of bills">
+          <td>{{ bill.id }}</td>
+          <td>{{ bill.customerId }}</td>
+          <td>{{ bill.status }}</td>
+          <td>{{ bill.date }}</td>
+          <td>{{ bill.price }}</td>
+          <td>
+            <button *ngIf="bill.status === 'PAID'" (click)="setStatus(bill, 'SHIPPED')">Set Status to SHIPPED</button>
+            <button *ngIf="bill.status === 'SHIPPED'" (click)="setStatus(bill, 'DELIVERED')">Set Status to DELIVERED</button>
+          </td>
+          <td>
+            <button (click)="selectBill(bill)">Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Article Table shown only when a bill is selected -->
+    <table class="article-table" *ngIf="selectedBill">
+      <thead>
+        <tr>
+          <th>Article ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let article of selectedBill.articleList">
+          <td>{{ article.id }}</td>
+          <td>{{ article.title }}</td>
+          <td>{{ article.description }}</td>
+          <td>{{ article.price }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  

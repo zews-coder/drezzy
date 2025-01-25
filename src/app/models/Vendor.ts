@@ -10,3 +10,13 @@ export interface VendorArticles {
     subtype: String,
     size: String
   }
+
+export interface Bill{
+    id: Number,
+    customerId: Number,
+    articleList: VendorArticles[];
+    date: String,
+    status: String,
+    price: Number,
+    showArticles?: boolean; // For toggling article dropdown visibility
+}

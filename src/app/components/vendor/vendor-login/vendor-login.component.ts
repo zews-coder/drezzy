@@ -24,6 +24,7 @@ export class VendorLoginComponent {
       next: (response) => {
         if (response.token) {
           sessionStorage.setItem('token', response.token);
+          localStorage.setItem('token', response.token);
           this.router.navigate(['/vendor-home']);
         } else {
           console.error('Token not found in response');
