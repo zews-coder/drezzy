@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import shoppingservice.enitites.enums.Status;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,8 @@ public class Bill implements Serializable {
     private Long id;
     private Long customerId;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Article> articleList;
+    private List<Article> articleList = new ArrayList<>();
     private Date date;
     private Status status;
+    private Double price;
 }
