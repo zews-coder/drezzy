@@ -24,9 +24,9 @@ export class VendorArticlesComponent implements OnInit{
     const url = 'http://localhost:9090/api/v1/articles/getAllArticles';
 
     this.http.get<VendorArticles[]>(url).subscribe({
+      
       next: (data) => {
         this.articles = data;
-        console.log('Articles fetched successfully:', this.articles);
       },
       error: (error) => {
         console.error('Error fetching articles:', error);

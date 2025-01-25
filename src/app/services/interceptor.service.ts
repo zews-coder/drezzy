@@ -12,17 +12,22 @@ import { Observable } from 'rxjs';
 })
 export class InterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const authToken = 'Bearer ' + sessionStorage.getItem('token');
-    if (!authToken) {
-      console.error('No auth token found!');
+    const token = sessionStorage.getItem('token');
+  
+    if (!token) {
+      console.warn('No token found in session storage.');
+      return next.handle(req); // Pass the request unmodified if no token is present.
     }
-
+  
+    const authToken = 'Bearer ' + token;
+  
+  
+  
     const authReq = req.clone({
-      setHeaders: {
-        Authorization: authToken,
-      },
+      headers: req.headers.set('Authorization', authToken),
     });
-
+  
     return next.handle(authReq);
   }
+  
 }

@@ -11,6 +11,7 @@ import { VendorHistoryComponent } from './components/vendor/vendor-history/vendo
 import { VendorOrdersComponent } from './components/vendor/vendor-orders/vendor-orders.component';
 
 export const routes: Routes = [
+    //CUSTOMER PAGES
     {
         path: "",
         component: HomePageComponent
@@ -19,7 +20,7 @@ export const routes: Routes = [
         path: "customer-login",
         component: CustomerLoginComponent
     },
-    
+    //VENDOR PAGES
     {
         path: "vendor-login",
         component: VendorLoginComponent
