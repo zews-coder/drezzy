@@ -29,19 +29,6 @@ public class BillController {
         }
     }
 
-    @GetMapping("/getAllFinished")
-    @Operation(description = "getting all bills with status FINISHED")
-    public ResponseEntity<?> getAllFinished(@RequestHeader("Authorization") String authorizationHeader) {
-        try {
-            if (jwtService.isAdmin(authorizationHeader.substring(7))){
-                return ResponseEntity.ok(billService.getAllFinished());
-            }
-            return ResponseEntity.status(403).build();
-        }catch (Exception e) {
-            return ResponseEntity.badRequest().body("/bills/getAllFinished went wrong");
-        }
-    }
-
     @GetMapping("/getAllPaid")
     @Operation(description = "getting all bills with status PAID")
     public ResponseEntity<?> getAllPaid(@RequestHeader("Authorization") String authorizationHeader) {
@@ -52,6 +39,32 @@ public class BillController {
             return ResponseEntity.status(403).build();
         }catch (Exception e) {
             return ResponseEntity.badRequest().body("/bills/getAllPaid went wrong");
+        }
+    }
+
+    @GetMapping("/getAllShipped")
+    @Operation(description = "getting all bills with status PAID")
+    public ResponseEntity<?> getAllShipped(@RequestHeader("Authorization") String authorizationHeader) {
+        try {
+            if (jwtService.isAdmin(authorizationHeader.substring(7))){
+                return ResponseEntity.ok(billService.getAllShipped());
+            }
+            return ResponseEntity.status(403).build();
+        }catch (Exception e) {
+            return ResponseEntity.badRequest().body("/bills/getAllShipped went wrong");
+        }
+    }
+
+    @GetMapping("/getAllDelivered")
+    @Operation(description = "getting all bills with status FINISHED")
+    public ResponseEntity<?> getAllDelivered(@RequestHeader("Authorization") String authorizationHeader) {
+        try {
+            if (jwtService.isAdmin(authorizationHeader.substring(7))){
+                return ResponseEntity.ok(billService.getAllDelivered());
+            }
+            return ResponseEntity.status(403).build();
+        }catch (Exception e) {
+            return ResponseEntity.badRequest().body("/bills/getAllDelivered went wrong");
         }
     }
 
@@ -71,7 +84,6 @@ public class BillController {
     public ResponseEntity<?> getBill(@RequestHeader("Authorization") String authorizationHeader, @RequestBody CreateBillDto createBillDto) {
         try{
             Long customerId = jwtService.extractId(authorizationHeader.substring(7));
-            System.out.println("id je: " + customerId + "   dto brojevi: " + createBillDto.toString());
             return ResponseEntity.ok(billService.createBill(createBillDto, customerId));
         }catch (Exception e) {
             return ResponseEntity.badRequest().body("/bills/add went wrong");
@@ -80,13 +92,13 @@ public class BillController {
 
     @PutMapping("/changeStatus")
     @Operation(description = "changeing order status")
-    public ResponseEntity<?> changeStatus (@RequestHeader("Authorization") String authorizationHeader, @RequestBody ChangeBillStatusDto changeBillStatusDto) {
+    public ResponseEntity<?> changeStatus (@RequestBody ChangeBillStatusDto changeBillStatusDto) {
         try {
-            if (jwtService.isAdmin(authorizationHeader.substring(7))){
+//            if (jwtService.isAdmin(authorizationHeader.substring(7))){
                 billService.setBillStatus(changeBillStatusDto.getBillId(), Status.valueOf(changeBillStatusDto.getStatus()));
                 return ResponseEntity.ok().build();
-            }
-            return ResponseEntity.status(403).build();
+//            }
+//            return ResponseEntity.status(403).build();
         }catch (Exception e) {
             return ResponseEntity.badRequest().body("/bills/changeStatus went wrong");
         }

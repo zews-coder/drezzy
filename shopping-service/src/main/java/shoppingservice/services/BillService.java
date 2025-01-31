@@ -9,6 +9,7 @@ import shoppingservice.repositories.ArticleRepository;
 import shoppingservice.repositories.BillRepository;
 import shoppingservice.utils.dtos.CreateBillDto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class BillService {
     private BillRepository billRepository;
     private ArticleRepository articleRepository;
 
+    /**GET**/
     public List<Bill> getAllBills() {
         return  billRepository.findAll();
     }
@@ -27,24 +29,27 @@ public class BillService {
     }
 
     public List<Bill> getAllPaid(){
-        return billRepository.findByStatus(Status.PAID);
+        return new ArrayList<>(billRepository.findByStatus(Status.PAID));
     }
 
-    public List<Bill> getAllFinished(){
+    public List<Bill> getAllShipped(){
+        return new ArrayList<>(billRepository.findByStatus(Status.SHIPPED));
+    }
+
+    public List<Bill> getAllDelivered(){
         return billRepository.findByStatus(Status.DELIVERED);
     }
 
+    /**POST**/
     public Bill createBill(CreateBillDto createBillDto, Long customerId) {
         Bill bill = new Bill();
         Double price = 0.0;
         bill.setStatus(Status.PAID);
         for (Long id : createBillDto.getArticleIds()){
-            System.out.println("USAO: " + id);
             if (articleRepository.findById(id).isPresent()){
                 Article article = articleRepository.findById(id).get();
                 bill.getArticleList().add(article);
                 price += article.getPrice();
-                System.out.println("PRONADJEN");
             }
         }
         bill.setPrice(price);
@@ -55,6 +60,10 @@ public class BillService {
     }
 
     public void setBillStatus(Long billId, Status status) {
-        billRepository.findById(billId).get().setStatus(status);
+        if (billRepository.findById(billId).isPresent()){
+            Bill bill = billRepository.findById(billId).get();
+            bill.setStatus(status);
+            billRepository.save(bill);
+        }
     }
 }
