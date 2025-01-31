@@ -1,15 +1,21 @@
 <div class="navbar-container">
   <nav class="navbar">
     <ul>
-      <li><a routerLink="/vendor-articles" routerLinkActive="active">Articles</a></li>
-      <li><a routerLink="/vendor-add" routerLinkActive="active">Add</a></li>
-      <li><a routerLink="/vendor-orders" routerLinkActive="active">Orders</a></li>
-      <li><a routerLink="/vendor-history" routerLinkActive="active">History</a></li>
+      <li><a routerLink="/vendor-articles" routerLinkActive="active">All Articles</a></li>
+      <li><a routerLink="/vendor-add" routerLinkActive="active">Add Article</a></li>
+      <li><a routerLink="/vendor-stats" routerLinkActive="active">Statistic</a></li>
+      
+      <!-- Dropdown for Orders (click to toggle visibility) -->
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn" (click)="toggleDropdown()">Orders ▼</a>
+        <ul *ngIf = "isDropdownOpen" class="dropdown-content" [class.show]="isDropdownOpen">
+          <li><a (click)="navigateToOrders('/vendor-orders')">PAID</a></li>
+          <li><a (click)="navigateToOrders('/vendor-shipped')">SHIPPED</a></li>
+          <li><a (click)="navigateToOrders('/vendor-history')">FINISHED</a></li>
+        </ul>
+      </li>
+
+      
     </ul>
   </nav>
 </div>
-
-<!-- <div class="content">
-  <router-outlet></router-outlet>
-</div> -->
-  

@@ -17,12 +17,10 @@
           <td>{{ bill.id }}</td>
           <td>{{ bill.customerId }}</td>
           <td>{{ bill.status }}</td>
-          <td>{{ bill.date }}</td>
+          <td>{{ bill.date | dateFormat}}</td>
           <td>{{ bill.price }}</td>
           <td>
-            <button *ngIf="bill.status === 'PAID'" (click)="setStatus(bill, 'SHIPPED')">Set Status to SHIPPED</button>
-            <button *ngIf="bill.status === 'SHIPPED'" (click)="setStatus(bill, 'DELIVERED')">Set Status to DELIVERED</button>
-          </td>
+            <button *ngIf="bill.status === 'PAID'" (click)="setStatus(bill, 'SHIPPED')">Set Status SHIPPED</button>
           <td>
             <button (click)="selectBill(bill)">Details</button>
           </td>

@@ -4,12 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { VendorArticles } from '../../../models/Vendor'
 import { VendorHomeComponent } from "../vendor-home/vendor-home.component";
+import { DateFormatPipe } from '../../../pipes/date-format.pipe'
 
 @Component({
   selector: 'app-vendor-articles',
   templateUrl: './vendor-articles.component.html',
   styleUrls: ['./vendor-articles.component.css'],
-  imports: [CommonModule, VendorHomeComponent, HttpClientModule],
+  imports: [CommonModule, VendorHomeComponent, HttpClientModule, DateFormatPipe],
 })
 export class VendorArticlesComponent implements OnInit{
   articles: VendorArticles[] = [];

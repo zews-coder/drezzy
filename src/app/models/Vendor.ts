@@ -2,7 +2,7 @@ export interface VendorArticles {
     id: Number
     title: String,
     description: String,
-    creationDate: String,
+    creationDate: string,
     price: Number,
     discount: Number,
     sex: String,
@@ -15,8 +15,8 @@ export interface Bill{
     id: Number,
     customerId: Number,
     articleList: VendorArticles[];
-    date: String,
+    date: string,
     status: String,
     price: Number,
-    showArticles?: boolean; // For toggling article dropdown visibility
+    showArticles?: boolean;
 }

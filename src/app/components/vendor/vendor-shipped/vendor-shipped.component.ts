@@ -6,20 +6,16 @@ import { Bill } from '../../../models/Vendor'
 import { DateFormatPipe } from '../../../pipes/date-format.pipe'
 
 @Component({
-  selector: 'app-vendor-orders',
+  selector: 'app-vendor-shipped',
   imports: [VendorHomeComponent, CommonModule, DateFormatPipe],
-  templateUrl: './vendor-orders.component.html',
-  styleUrl: './vendor-orders.component.css'
+  templateUrl: './vendor-shipped.component.html',
+  styleUrl: './vendor-shipped.component.css'
 })
-export class VendorOrdersComponent implements OnInit{
-  bills: Bill[] = [];
+export class VendorShippedComponent implements OnInit{
+  billsShipped: Bill [] = [];
   selectedBill: Bill | null = null;
-  
-  constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    this.fetchBills();
-  }
+  constructor(private http: HttpClient) {}
 
   private getAuthHeaders() {
     if (typeof window !== 'undefined') {
@@ -31,20 +27,26 @@ export class VendorOrdersComponent implements OnInit{
     return new HttpHeaders();
   }
 
-  // Fetching bills from the provided URL
-  fetchBills(): void {
+  ngOnInit(): void {
+    this.fetchBillsShipped();
+  }
+
+  fetchBillsShipped(): void {
     const headers = this.getAuthHeaders();
-    this.http.get<Bill[]>('http://localhost:9090/api/v1/bills/getAllPaid', { headers }).subscribe(
+    this.http.get<Bill[]>('http://localhost:9090/api/v1/bills/getAllShipped', { headers }).subscribe(
       (data) => {
-        this.bills = data;
+        this.billsShipped = data;
       },
       (error) => {
-        console.error('Error fetching bills: paid')
+        console.error('Error fetching bills: shipped');
       }
     );
   }
 
-  // Function to set the bill status
+  selectBill(bill: Bill): void {
+    this.selectedBill = bill;  // Set the clicked bill as selectedBill
+  }
+
   setStatus(bill: any, newStatus: string): void {
     const url = 'http://localhost:9090/api/v1/bills/changeStatus';
     const dto = {
@@ -59,13 +61,8 @@ export class VendorOrdersComponent implements OnInit{
         bill.status = newStatus; // Update UI after success
       },
       error: (error) => {
-        console.error('Error updating status:', error);
+        console.error('Error updating status: vendor=shipped');
       }
     });
-  }
-
-  // Set selectedBill to the clicked bill
-  selectBill(bill: Bill): void {
-    this.selectedBill = bill;  // Set the clicked bill as selectedBill
   }
 }

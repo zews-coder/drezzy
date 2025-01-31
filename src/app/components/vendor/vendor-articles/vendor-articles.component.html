@@ -29,7 +29,7 @@
           <td>{{ article.sex }}</td>
           <td>{{ article.visible ? 'Yes' : 'No' }}</td>
           <td>{{ article.subtype }}</td>
-          <td>{{ article.creationDate }}</td>
+          <td>{{ article.creationDate | dateFormat }}</td>
         </tr>
       </tbody>
     </table>

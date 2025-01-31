@@ -8,16 +8,20 @@
           <th>Status</th>
           <th>Date</th>
           <th>Price</th>
+          <th>Actions</th>
           <th>Details</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let bill of bills">
+        <tr *ngFor="let bill of billsShipped">
           <td>{{ bill.id }}</td>
           <td>{{ bill.customerId }}</td>
           <td>{{ bill.status }}</td>
           <td>{{ bill.date | dateFormat}}</td>
           <td>{{ bill.price }}</td>
+          <td>
+            <button *ngIf="bill.status === 'SHIPPED'" (click)="setStatus(bill, 'DELIVERED')">Set Status DELIVERED</button>
+          </td>
           <td>
             <button (click)="selectBill(bill)">Details</button>
           </td>
