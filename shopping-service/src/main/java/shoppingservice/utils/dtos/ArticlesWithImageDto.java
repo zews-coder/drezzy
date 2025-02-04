@@ -1,19 +1,27 @@
 package shoppingservice.utils.dtos;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.NoArgsConstructor;
 import shoppingservice.enitites.enums.Sex;
 import shoppingservice.enitites.enums.SubtypeClothes;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
-public class CreateClothesDto implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+public class ArticlesWithImageDto implements Serializable {
+    private Long id;
     private String title;
     private String description;
+    private Date creationDate;
     private Double price;
     private Integer discount;
     private Sex sex;
-    private SubtypeClothes subtype_clothes;
+    private Boolean visible;
+    private String subtype;
     private String size;
+    private String imageUrl;
 }

@@ -28,7 +28,7 @@ public class ArticleController{
 //            }
 //            return ResponseEntity.badRequest().body("/getAllArticles went wrong");
         }catch (Exception e){
-            return ResponseEntity.badRequest().body("/getAllArticles went wrong");
+            return ResponseEntity.badRequest().body("/getAllArticles went wrong" + e.getMessage());
         }
     }
 

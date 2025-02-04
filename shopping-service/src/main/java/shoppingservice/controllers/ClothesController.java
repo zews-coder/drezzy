@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import shoppingservice.services.ClothesService;
 import shoppingservice.services.JwtService;
 import shoppingservice.utils.dtos.CreateClothesDto;
@@ -24,12 +25,16 @@ public class ClothesController {
         }
     }
 
-    @PostMapping("/add")
+    @PostMapping(path = "/add", consumes = "multipart/form-data")
     @Operation(summary = "creating new clothes")
-    public ResponseEntity<?> addClothes(@RequestHeader("Authorization") String authorizationHeader, @RequestBody CreateClothesDto createClothesDto) {
+    public ResponseEntity<?> addClothes(@RequestHeader("Authorization") String authorizationHeader,
+                                        //@RequestBody CreateClothesDto createClothesDto, @ModelAttribute MultipartFile image) {
+                                        @RequestPart("createClothesDto") CreateClothesDto createClothesDto,
+                                        @RequestPart("image") MultipartFile image){
         try {
             if (jwtService.isAdmin(authorizationHeader.substring(7))){
-                return ResponseEntity.ok(clothesService.addClothes(createClothesDto));
+
+                return ResponseEntity.ok(clothesService.addClothes(createClothesDto, image));
             }
             return ResponseEntity.status(403).build();
         } catch (Exception e) {
