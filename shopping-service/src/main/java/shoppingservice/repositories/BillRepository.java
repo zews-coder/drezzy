@@ -11,4 +11,5 @@ import java.util.List;
 public interface BillRepository extends JpaRepository<Bill, Long> {
     List<Bill> findByStatus(Status status);
     List<Bill> findByCustomerId(Long customerId);
+    int countByStatus(Status status);
 }
