@@ -8,7 +8,8 @@ export interface VendorArticles {
     sex: String,
     visible: boolean,
     subtype: String,
-    size: String
+    size: String,
+    imageUrl: String
   }
 
 export interface Bill{
