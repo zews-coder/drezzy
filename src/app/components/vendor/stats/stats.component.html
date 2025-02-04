@@ -1,2 +1,39 @@
 <app-vendor-home></app-vendor-home>
-<p>stats works!</p>
+<div class="stats-container">
+    <!-- Earnings Card -->
+    <div class="card">
+      <h2>Total Earnings</h2>
+      <p class="earnings">${{ earnings | number: '1.2-2' }}</p>
+    </div>
+  
+    <!-- Items Sold Bar Chart -->
+    <div class="chart-container">
+      <h2>Items Sold</h2>
+      <ngx-charts-bar-vertical
+        [results]="itemsSoldData"
+        [view]="view"
+        [scheme]="'cool'"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        xAxisLabel="Category"
+        yAxisLabel="Quantity">
+      </ngx-charts-bar-vertical>
+    </div>
+  
+    <!-- Orders by Status Pie Chart -->
+    <div class="chart-container">
+      <h2>Orders by Status</h2>
+      <ngx-charts-pie-chart
+        [results]="ordersData"
+        [view]="view"
+        [scheme]="'vivid'"
+        [legend]="true"
+        [labels]="true"
+        [doughnut]="true">
+      </ngx-charts-pie-chart>
+    </div>
+  </div>
+  
