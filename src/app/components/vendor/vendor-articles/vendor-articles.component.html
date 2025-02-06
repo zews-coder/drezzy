@@ -1,11 +1,11 @@
 <app-vendor-home></app-vendor-home>
 <div class="container">
-  <h2>Vendor Articles</h2>
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Image</th>
         <th>ID</th>
+        <th>Image</th>
+        
         <th>Title</th>
         <th>Description</th>
         <th>Price</th>
@@ -15,23 +15,30 @@
         <th>Visible</th>
         <th>Subtype</th>
         <th>Creation Date</th>
+        <th>Actions</th>
+        <th>Set Discount</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let article of articles">
+        <td>{{ article.id }}</td>
         <td>
           <img *ngIf="article.imageUrl" [src]="'data:image/jpeg;base64,' + article.imageUrl" alt="Article Image" style="max-width: 100px; max-height: 100px;"/>
         </td>
-        <td>{{ article.id }}</td>
         <td>{{ article.title }}</td>
-        <td>{{ article.description }}</td>
+        <td>{{ article.description | slice:0:10 }}{{ article.description.length > 10 ? '...' : '' }}</td>
         <td>{{ article.price }}</td>
-        <td>{{ article.discount }}</td>
+        <td>{{ article.discount }}%</td>
         <td>{{ article.size }}</td>
         <td>{{ article.sex }}</td>
         <td>{{ article.visible ? 'Yes' : 'No' }}</td>
         <td>{{ article.subtype }}</td>
         <td>{{ article.creationDate | dateFormat }}</td>
+        <td><button (click)="changeVisibility(article)">Change visibility</button></td>
+        <td>
+          <input type="number" [(ngModel)]="discountInputs[article.id.toString()]" placeholder="Enter discount" min="0" max="100" />
+          <button (click)="updateDiscount(article, discountInputs[article.id.toString()])">Apply Discount</button>
+        </td>
       </tr>
     </tbody>
   </table>

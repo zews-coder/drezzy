@@ -1,7 +1,7 @@
 export interface VendorArticles {
     id: Number
     title: String,
-    description: String,
+    description: string,
     creationDate: string,
     price: Number,
     discount: Number,
