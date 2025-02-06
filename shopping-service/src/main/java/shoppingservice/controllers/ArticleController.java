@@ -32,4 +32,26 @@ public class ArticleController{
         }
     }
 
+    @PutMapping( "/discount/{id}")
+    @Operation(summary = "set discount for article")
+    public ResponseEntity<?> setDiscount(@PathVariable("id") Long id, @RequestParam Integer discount){
+        try {
+            articleService.setDiscount(id, discount);
+            return ResponseEntity.ok().build();
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("/setDiscount went wrong" + e.getMessage());
+        }
+    }
+
+    @DeleteMapping(path = "/visibility/{id}")
+    @Operation(summary = "changing article visibility")
+    public ResponseEntity<?> changeArticleVisibility(@PathVariable("id") Long id){
+        try {
+            articleService.changeArticleVisibility(id);
+            return ResponseEntity.ok().build();
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("/changeArticleVisibility went wrong");
+        }
+    }
+
 }

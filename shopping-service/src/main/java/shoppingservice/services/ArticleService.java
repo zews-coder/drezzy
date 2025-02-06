@@ -54,4 +54,18 @@ public class ArticleService {
 
         return articlesWithImageDtos;
     }
+
+    public void changeArticleVisibility(Long id){
+        articleRepository.findById(id).ifPresent(article -> {
+            article.setVisible(!article.getVisible());
+            articleRepository.save(article);
+        });
+    }
+
+    public void setDiscount(Long id, Integer discount) {
+        articleRepository.findById(id).ifPresent(article -> {
+            article.setDiscount(discount);
+            articleRepository.save(article);
+        });
+    }
 }
