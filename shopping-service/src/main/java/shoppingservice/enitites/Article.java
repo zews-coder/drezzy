@@ -28,4 +28,5 @@ public class Article implements Serializable {
     private Boolean visible = true;
     @Lob
     private byte[] image;
+    private Integer visited = 0;
 }

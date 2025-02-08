@@ -21,6 +21,33 @@ public class ArticleService {
     private final ClothesRepository clothesRepository;
     private final ShoesRepository shoesRepository;
 
+    private final ShoesService shoesService;
+    private final ClothesService clothesService;
+
+    public List<ArticlesWithImageDto> findAllNewest(){
+        List<ArticlesWithImageDto> allArticles = new ArrayList<>();
+        allArticles.addAll(shoesService.findAllNewest());
+        allArticles.addAll(clothesService.findAllNewest());
+
+        return allArticles;
+    }
+
+    public List<ArticlesWithImageDto> findAllOnDiscount(){
+        List<ArticlesWithImageDto> allArticles = new ArrayList<>();
+        allArticles.addAll(shoesService.findAllOnDiscount());
+        allArticles.addAll(clothesService.findAllOnDiscount());
+
+        return allArticles;
+    }
+
+    public List<ArticlesWithImageDto> mostVisited(){
+        List<ArticlesWithImageDto> allArticles = new ArrayList<>();
+        allArticles.addAll(shoesService.mostVisited());
+        allArticles.addAll(clothesService.mostVisited());
+
+        return allArticles;
+    }
+
     public List<ArticlesWithImageDto> getAllArticles() {
         List<ArticlesWithImageDto> articlesWithImageDtos = new ArrayList<>();
         List<Article> articles = articleRepository.findAll();

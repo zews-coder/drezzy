@@ -3,19 +3,69 @@ package shoppingservice.services;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import shoppingservice.enitites.ArticleClothes;
 import shoppingservice.enitites.ArticleShoes;
 import shoppingservice.enitites.enums.Sex;
 import shoppingservice.enitites.enums.SubtypeShoes;
 import shoppingservice.repositories.ShoesRepository;
+import shoppingservice.utils.dtos.ArticlesWithImageDto;
 import shoppingservice.utils.dtos.CreateShoesDto;
+import shoppingservice.utils.dtos.CustomerArticleDto;
+import shoppingservice.utils.mappers.ArticleMapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class ShoesService {
     private ShoesRepository shoesRepository;
+
+    public CustomerArticleDto findById(Long id) {
+        ArticleShoes articleShoes = shoesRepository.findById(id).orElse(null);
+        if (articleShoes == null) {
+            return null;
+        }
+        articleShoes.setVisited(articleShoes.getVisited()+1);
+        shoesRepository.save(articleShoes);
+        CustomerArticleDto customerArticleDto = ArticleMapper.INSTANCE.shoesArticleToCustomerArticleDto(articleShoes);
+        customerArticleDto.setImageUrl(Base64.getEncoder().encodeToString(articleShoes.getImage()));
+        return customerArticleDto;
+    }
+
+    public List<ArticlesWithImageDto> findBySubtype (String subtype) {
+        return convertList(shoesRepository.findAllBySubtypeAndSexAndVisible(SubtypeShoes.valueOf(subtype), Sex.MEN, true));
+    }
+
+    public List<ArticlesWithImageDto> findAllNewest(){
+        return convertList(shoesRepository.findTop10BySexAndVisibleOrderByCreationDateDesc(Sex.MEN,true));
+    }
+
+    public List<ArticlesWithImageDto> findAllOnDiscount(){
+        return convertList(shoesRepository.findAllBySexAndDiscountGreaterThanAndVisible(Sex.MEN, 0, true));
+    }
+
+    public List<ArticlesWithImageDto> mostVisited(){
+        return convertList(shoesRepository.findTop10BySexAndVisibleOrderByVisitedDesc(Sex.MEN, true));
+    }
+
+    private List<ArticlesWithImageDto> convertList(List<ArticleShoes> articleShoesList) {
+        List<ArticlesWithImageDto> articlesWithImageDtoList = new ArrayList<>();
+
+        for (ArticleShoes articleShoes : articleShoesList) {
+            ArticlesWithImageDto articlesWithImageDto = ArticleMapper.INSTANCE.shoesToArticlesWithImageDto(articleShoes);
+            if (articleShoes.getImage() != null) {
+                articlesWithImageDto.setImageUrl(Base64.getEncoder().encodeToString(articleShoes.getImage()));
+            }
+
+            articlesWithImageDtoList.add(articlesWithImageDto);
+        }
+
+        return articlesWithImageDtoList;
+    }
 
     public ArticleShoes addShoes(CreateShoesDto createShoesDto, MultipartFile image) throws IOException {
         ArticleShoes articleShoes = new ArticleShoes();
