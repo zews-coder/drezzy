@@ -5,10 +5,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import shoppingservice.enitites.Article;
 import shoppingservice.services.ArticleService;
 import shoppingservice.services.ClothesService;
 import shoppingservice.services.ShoesService;
-
 
 @RestController()
 @RequestMapping("/api/v1/men")
@@ -17,6 +17,16 @@ public class ArticleMenController {
     private final ShoesService shoesService;
     private final ClothesService clothesService;
     private final ArticleService articleService;
+
+    @GetMapping(path = "/article/{id}",  produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "check in bote repositories for article")
+    public ResponseEntity<?> getArticle(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(articleService.getArticle(id));
+        }catch (Exception e) {
+            return ResponseEntity.badRequest().body("/article/{id} went wrong: " + e.getMessage());
+        }
+    }
 
     @GetMapping(path = "/clothes/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation( summary = "returns one clothes article")

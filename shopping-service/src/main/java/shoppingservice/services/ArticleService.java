@@ -9,6 +9,7 @@ import shoppingservice.repositories.ArticleRepository;
 import shoppingservice.repositories.ClothesRepository;
 import shoppingservice.repositories.ShoesRepository;
 import shoppingservice.utils.dtos.ArticlesWithImageDto;
+import shoppingservice.utils.dtos.CustomerArticleDto;
 
 import java.util.ArrayList;
 import java.util.Base64;
@@ -23,6 +24,14 @@ public class ArticleService {
 
     private final ShoesService shoesService;
     private final ClothesService clothesService;
+
+    public CustomerArticleDto getArticle(Long id) {
+        if (clothesRepository.findById(id).isPresent()) {
+            return clothesService.findById(id);
+        }else {
+            return shoesService.findById(id);
+        }
+    }
 
     public List<ArticlesWithImageDto> findAllNewest(){
         List<ArticlesWithImageDto> allArticles = new ArrayList<>();
