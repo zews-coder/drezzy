@@ -20,11 +20,21 @@ export class VendorLoginComponent {
   //login function
   onSubmit() {
     const url = 'http://localhost:8080/auth/user';
+    
+    if(localStorage.getItem("token") !== null){
+      localStorage.removeItem("token");
+    }
+
+    if(sessionStorage.getItem("token") !== null){
+      sessionStorage.removeItem("token");
+    }
+
     this.http.post<{ token: string }>(url, this.loginData).subscribe({
       next: (response) => {
         if (response.token) {
           sessionStorage.setItem('token', response.token);
           localStorage.setItem('token', response.token);
+          
           this.router.navigate(['/vendor-articles']);
         } else {
           console.error('Token not found in response');

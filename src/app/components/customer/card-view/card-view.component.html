@@ -1,0 +1,10 @@
+
+<div class="card">
+  <img *ngIf="imageUrl" [src]="'data:image/jpeg;base64,' + imageUrl" alt="Article Image" style="max-width: 100px; max-height: 100px;"/>
+  <div class="card-body">
+    <h3 class="card-title">{{ title }}</h3>
+    <p class="card-price">${{ price }}</p>
+    <button (click)="viewArticle()">View</button>
+  </div>
+</div>
+

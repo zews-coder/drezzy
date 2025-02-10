@@ -15,18 +15,22 @@ export class CustomerLoginComponent {
     password: '',
   };
 
-  constructor(private http: HttpClient, router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   //login function
   onSubmit() {
     const url = 'http://localhost:8080/auth/customer';
+    if(sessionStorage.getItem("token") !== null){
+      sessionStorage.removeItem("token");
+    }
     this.http.post<{ token: string }>(url, this.loginData).subscribe({
       next: (response) => {
         if (response.token) {
           // Save the token in session storage
           sessionStorage.setItem('token', response.token);
           console.log('Token saved to session storage:', response.token);
-          alert('Login successful!');
+          
+          this.router.navigate(['/']);
         } else {
           console.error('Token not found in response');
         }

@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<div class="trends-container">
+    <h2>Newest Articles</h2>
+    <div class="trends-grid">
+      <app-card-view
+        *ngFor="let article of articles"
+        [id]="article.id"
+        [imageUrl]="article.imageUrl"
+        [title]="article.title"
+        [price]="article.price">
+      </app-card-view>
+    </div>
+</div>

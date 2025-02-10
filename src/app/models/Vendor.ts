@@ -1,15 +1,15 @@
 export interface VendorArticles {
-    id: Number
-    title: String,
+    id: number
+    title: string,
     description: string,
     creationDate: string,
-    price: Number,
-    discount: Number,
-    sex: String,
+    price: number,
+    discount: number,
+    sex: string,
     visible: boolean,
-    subtype: String,
-    size: String,
-    imageUrl: String
+    subtype: string,
+    size: string,
+    imageUrl: string
   }
 
 export interface Bill{
@@ -20,4 +20,14 @@ export interface Bill{
     status: String,
     price: Number,
     showArticles?: boolean;
+}
+
+export interface SingleArticle{
+  id: Number,
+  title: string,
+  description: string,
+  price: Number,
+  discount: Number,
+  size: string,
+  imageUrl: string
 }
