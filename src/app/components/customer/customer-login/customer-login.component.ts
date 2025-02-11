@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-customer-login',
@@ -15,7 +16,7 @@ export class CustomerLoginComponent {
     password: '',
   };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}
 
   //login function
   onSubmit() {
@@ -27,7 +28,8 @@ export class CustomerLoginComponent {
       next: (response) => {
         if (response.token) {
           // Save the token in session storage
-          sessionStorage.setItem('token', response.token);
+          //sessionStorage.setItem('token', response.token);
+          this.authService.setJwt(response.token);
           console.log('Token saved to session storage:', response.token);
           
           this.router.navigate(['/']);

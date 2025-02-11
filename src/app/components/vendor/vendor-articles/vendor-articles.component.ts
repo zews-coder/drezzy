@@ -28,7 +28,7 @@ export class VendorArticlesComponent implements OnInit{
       return new HttpHeaders({
         'Authorization': token ? `Bearer ${token}` : '',
       });
-    }
+  }
 
   fetchVendorArticles() {
     const url = 'http://localhost:9090/api/v1/articles/getAllArticles';

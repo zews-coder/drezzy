@@ -21,6 +21,12 @@
   
       <p class="size"><strong>Size:</strong> {{ article?.size }}</p>
       <p class="description">{{ article?.description }}</p>
+
+      <div class="button-container">
+        <button (click)="addToWishList(article?.id ?? 0)" class="wishlist-button">Add to Wishlist</button>
+        <button (click)="addToBag(article?.id ?? 0)" class="bag-button">Add to Bag</button>
+      </div>
     </div>
+
   </div>
   

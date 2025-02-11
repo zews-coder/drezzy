@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 import { NavbarComponent } from "../men/navbar/navbar.component";
 import { SingleArticle } from "../../../models/Vendor";
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-single-article',
@@ -13,7 +14,7 @@ import { SingleArticle } from "../../../models/Vendor";
 export class SingleArticleComponent implements OnInit{
   article: SingleArticle | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit(): void {
     const id = localStorage.getItem('article');
@@ -22,6 +23,14 @@ export class SingleArticleComponent implements OnInit{
     }else{
       alert("NE RADI SINGLE VIEW")
     }
+  }
+
+  private getAuthHeaders() {
+      const token = this.authService.getJwt();
+      console.log("dodajem token:" + token);
+      return new HttpHeaders({
+        'Authorization': token ? `Bearer ${token}` : '',
+      });
   }
 
   fetchArticle(id: string) {
@@ -37,5 +46,20 @@ export class SingleArticleComponent implements OnInit{
       },
     });
   }
-  
+
+  addToWishList(id: number){
+    const url = `http://localhost:9090/api/v1/user/wishlist/${id}`;
+
+    this.http.post(url, {}, { headers: this.getAuthHeaders() }).subscribe(
+      () => {
+        alert("Uspesno dodat na listu zelja");
+      },
+      (error) => {
+        console.error('Error adding article on wishlist', error);
+      }
+    );
+  }
+
+  addToBag(id: number){}
+
 }

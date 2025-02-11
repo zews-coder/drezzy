@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('token');
+      const token = this.authService.getJwt();
       
       if (token) {
         console.log('INTERCEPTUJEM')
@@ -20,9 +20,6 @@ export class AuthInterceptor implements HttpInterceptor {
         });
         return next.handle(authReq);
       }
-    } else {
-      console.log('NE RADI INTERCEPT')
-    }
   
     return next.handle(req);
   }
