@@ -1,2 +1,26 @@
 <app-navbar></app-navbar>
-<p>clothing works!</p>
+<div class="clothing-container">
+    <!-- Sidebar for categories -->
+    <div class="sidebar">
+      <button (click)="fetchArticles('TSHIRTSnPOLOS')">T-Shirts & Polos</button>
+      <button (click)="fetchArticles('SHIRTS')">Shirts</button>
+      <button (click)="fetchArticles('SWEATSHIRTSnHOODIES')">Sweatshirts & Hoodies</button>
+      <button (click)="fetchArticles('TROUSERS')">Trousers</button>
+      <button (click)="fetchArticles('JEANS')">Jeans</button>
+      <button (click)="fetchArticles('JACKETSnCOATS')">Jackets & Coats</button>
+      <button (click)="fetchArticles('TRACKSUITS')">Tracksuits</button>
+      <button (click)="fetchArticles('UNDERWEARnSOCKS')">Underwear & Socks</button>
+    </div>
+  
+    <!-- Articles Grid -->
+    <div class="articles-grid">
+      <app-card-view
+        *ngFor="let article of articles"
+        [id]="article.id"
+        [imageUrl]="article.imageUrl"
+        [title]="article.title"
+        [price]="article.price">
+      </app-card-view>
+    </div>
+  </div>
+  

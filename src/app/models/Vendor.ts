@@ -23,11 +23,11 @@ export interface Bill{
 }
 
 export interface SingleArticle{
-  id: Number,
+  id: number,
   title: string,
   description: string,
-  price: Number,
-  discount: Number,
+  price: number,
+  discount: number,
   size: string,
   imageUrl: string
 }

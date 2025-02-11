@@ -1,2 +1,26 @@
 <app-navbar></app-navbar>
-<p>single-article works!</p>
+<div class="single-article-container">
+    <div class="image-container">
+      <img *ngIf="article?.imageUrl" [src]="'data:image/jpeg;base64,' + article?.imageUrl" alt="Article Image">
+    </div>
+  
+    <div class="details-container">
+      <h2 class="title">{{ article?.title }}</h2>
+  
+      <p class="price">
+        <span *ngIf="(article?.discount ?? 0) > 0" class="old-price">
+            ${{ article?.price ?? 0 }}
+        </span>
+        <span *ngIf="(article?.discount ?? 0) > 0" class="discounted-price">
+            ${{ ((article?.price ?? 0) * (1 - (article?.discount ?? 0) / 100)) | number:'1.2-2' }}
+        </span>  
+        <span *ngIf="!article?.discount || article?.discount === 0">
+          ${{ article?.price ?? 0 }}
+        </span>
+      </p>
+  
+      <p class="size"><strong>Size:</strong> {{ article?.size }}</p>
+      <p class="description">{{ article?.description }}</p>
+    </div>
+  </div>
+  

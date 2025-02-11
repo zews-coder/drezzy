@@ -6,7 +6,7 @@ import { SingleArticle } from "../../../models/Vendor";
 
 @Component({
   selector: 'app-single-article',
-  imports: [NavbarComponent],
+  imports: [NavbarComponent, CommonModule],
   templateUrl: './single-article.component.html',
   styleUrl: './single-article.component.css'
 })
@@ -29,7 +29,7 @@ export class SingleArticleComponent implements OnInit{
   
     this.http.get<SingleArticle>(url).subscribe({
       next: (response) => {
-        this.article = response; // Store the article if the first request succeeds
+        this.article = response;
         console.log("ID je: " + id)
       },
       error: (err) => {

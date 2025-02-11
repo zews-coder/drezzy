@@ -1,0 +1,56 @@
+.single-article-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .image-container img {
+    max-width: 300px;
+    max-height: 400px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .details-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .price {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .old-price {
+    text-decoration: line-through;
+    color: gray;
+    margin-right: 10px;
+  }
+  
+  .discounted-price {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .size {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .description {
+    font-size: 16px;
+    color: #555;
+  }
+  

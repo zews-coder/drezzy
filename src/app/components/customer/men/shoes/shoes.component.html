@@ -1,2 +1,23 @@
 <app-navbar></app-navbar>
-<p>shoes works!</p>
+<div class="clothing-container">
+    <!-- Sidebar for categories -->
+    <div class="sidebar">
+      <button (click)="fetchArticles('BOOTS')">Boots</button>
+      <button (click)="fetchArticles('SNEAKERS')">Sneakers</button>
+      <button (click)="fetchArticles('SPORT')">Sport</button>
+      <button (click)="fetchArticles('BUSINESS')">Business</button>
+      <button (click)="fetchArticles('LOAFERS')">Loafers</button>
+    </div>
+  
+    <!-- Articles Grid -->
+    <div class="articles-grid">
+      <app-card-view
+        *ngFor="let article of articles"
+        [id]="article.id"
+        [imageUrl]="article.imageUrl"
+        [title]="article.title"
+        [price]="article.price">
+      </app-card-view>
+    </div>
+</div>
+
