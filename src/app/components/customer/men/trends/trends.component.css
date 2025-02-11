@@ -1,13 +1,25 @@
 .trends-container {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .trends-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    justify-items: center;
-    padding: 20px;
-  }
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.articles-grid {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  justify-content: center;
+}
+
+.block{
+  background-color: white;
+  width: 600px;
+}
+
+h2 {
+  text-align: center;
+  width: 100%;
+}
+
   

@@ -1,25 +1,61 @@
-import { Injectable } from '@angular/core';
+// import { Injectable } from '@angular/core';
+
+// @Injectable({
+//   providedIn: 'root' // This makes the service available globally
+// })
+// export class AuthService {
+//   private jwt: string = ''; // Private field to store JWT
+
+//   constructor() {}
+
+//   // Function to set the JWT token
+//   setJwt(token: string): void {
+//     sessionStorage.setItem("token", token);
+//     this.jwt = token;
+//   }
+
+//   // Function to get the JWT token
+//   getJwt(): string {
+//     return sessionStorage.getItem("token") ?? this.jwt;
+//   }
+
+//   removeJwt(){
+//     sessionStorage.removeItem("token");
+//     this.jwt = '';
+//   }
+// }
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root' // This makes the service available globally
 })
 export class AuthService {
-  private jwt: string = ''; // Private field to store JWT
+  private jwt: string = '';
 
-  constructor() {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   // Function to set the JWT token
   setJwt(token: string): void {
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem("token", token);
+    }
     this.jwt = token;
   }
 
   // Function to get the JWT token
   getJwt(): string {
+    if (isPlatformBrowser(this.platformId)) {
+      return sessionStorage.getItem("token") ?? this.jwt;
+    }
     return this.jwt;
   }
 
-  removeJwt(){
+  // Function to remove the JWT token
+  removeJwt(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.removeItem("token");
+    }
     this.jwt = '';
   }
 }
-

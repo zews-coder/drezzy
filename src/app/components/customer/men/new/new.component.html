@@ -1,13 +1,18 @@
 <app-navbar></app-navbar>
+<h2>Newest Articles</h2>
 <div class="trends-container">
-    <h2>Newest Articles</h2>
-    <div class="trends-grid">
+    <div class="block"></div>
+
+    <div class="articles-grid">
       <app-card-view
         *ngFor="let article of articles"
         [id]="article.id"
         [imageUrl]="article.imageUrl"
         [title]="article.title"
-        [price]="article.price">
+        [price]="article.price"
+        [discount]="article.discount">
       </app-card-view>
     </div>
+    
+    <div class="block"></div>
 </div>

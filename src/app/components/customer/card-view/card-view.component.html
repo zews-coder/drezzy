@@ -1,10 +1,22 @@
-
 <div class="card">
-  <img *ngIf="imageUrl" [src]="'data:image/jpeg;base64,' + imageUrl" alt="Article Image" style="max-width: 100px; max-height: 100px;"/>
+  <img *ngIf="imageUrl" [src]="'data:image/jpeg;base64,' + imageUrl" alt="Article Image" class="card-image"/>
+
   <div class="card-body">
     <h3 class="card-title">{{ title }}</h3>
-    <p class="card-price">${{ price }}</p>
+
+    <!-- Display price and discount -->
+    <p class="card-price">
+      <span *ngIf="discount; else noDiscount">
+        <span class="original-price">${{ price }}</span>
+        <span class="discounted-price">${{ (price * (1 - discount / 100) | number:'1.2-2') }}</span>
+      </span>
+      <ng-template #noDiscount>
+        ${{ price }}
+      </ng-template>
+    </p>
+
     <button (click)="viewArticle()">View</button>
   </div>
 </div>
+
 

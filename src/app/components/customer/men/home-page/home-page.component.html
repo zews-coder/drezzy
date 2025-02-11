@@ -1,3 +1,37 @@
 <app-navbar></app-navbar>
-<p>home-page works!</p>
-<h1>WELCOME</h1>
+<div class="homepage">
+    <!-- Hero Section -->
+    <div class="hero">
+      <div class="overlay"></div>
+      <div class="hero-content">
+        <h1 class="fade-in">Welcome to <span class="brand">Drezzy</span></h1>
+        <p class="slide-up">Discover the latest fashion trends</p>
+        <button (click)="shopNow()" class="shop-btn">Shop Now</button>
+      </div>
+    </div>
+  
+    <!-- Trending Categories -->
+    <div class="categories">
+      <h2>🔥 Trending Categories</h2>
+      <div class="category-grid">
+        <div class="category-card" (click)="viewCategory('men/clothing')">
+          <img src="" alt="T-Shirts & Polos">
+          <p>Clothing</p>
+        </div>
+        <div class="category-card" (click)="viewCategory('men/shoes')">
+          <img src="" alt="Sneakers">
+          <p>Shoes</p>
+        </div>
+        <div class="category-card" (click)="viewCategory('men/sale')">
+          <img src="" alt="Tracksuits">
+          <p>On Sale</p>
+        </div>
+        <div class="category-card" (click)="viewCategory('men/accessories')">
+          <img src="" alt="Jewelery">
+          <p>Accessories</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+

@@ -1,0 +1,24 @@
+.trends-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.articles-grid {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    justify-content: center;
+}
+
+.block{
+    background-color: white;
+    width: 600px;
+}
+
+h2 {
+    text-align: center;
+    width: 100%;
+}
+  

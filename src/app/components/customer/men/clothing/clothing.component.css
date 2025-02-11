@@ -6,7 +6,8 @@
   
   /* Sidebar Styling */
   .sidebar {
-    width: 200px;
+    padding-left: 20px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -30,7 +31,13 @@
     flex-grow: 1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 10px;
     justify-content: center;
   }
+
+  .block{
+    background-color: white;
+    width: 600px;
+  }
+  
   

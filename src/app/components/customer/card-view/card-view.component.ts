@@ -14,6 +14,7 @@ export class CardViewComponent {
   @Input() imageUrl!: string;
   @Input() title!: string;
   @Input() price!: number;
+  @Input() discount!: number;
 
   constructor(private router: Router){}
 

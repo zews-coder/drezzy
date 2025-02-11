@@ -48,6 +48,9 @@ export class SingleArticleComponent implements OnInit{
   }
 
   addToWishList(id: number){
+    if(id == 0){
+      return;
+    }
     const url = `http://localhost:9090/api/v1/user/wishlist/${id}`;
 
     this.http.post(url, {}, { headers: this.getAuthHeaders() }).subscribe(
@@ -60,6 +63,20 @@ export class SingleArticleComponent implements OnInit{
     );
   }
 
-  addToBag(id: number){}
+  addToBag(id: number){
+    if(id == 0){
+      return;
+    }
+    const url = `http://localhost:9090/api/v1/user/bag/${id}`;
+
+    this.http.post(url, {}, { headers: this.getAuthHeaders() }).subscribe(
+      () => {
+        alert("Uspesno dodat u korpu");
+      },
+      (error) => {
+        console.error('Error adding article on wishlist', error);
+      }
+    );
+  }
 
 }
