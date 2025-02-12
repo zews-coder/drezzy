@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import userservice.entities.Customer;
-import userservice.entities.Role;
-import userservice.entities.User;
+import userservice.entities.*;
 import userservice.repositories.CustomerRepository;
 import userservice.repositories.UserRepository;
 
@@ -19,8 +17,6 @@ public class BootstrapConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        //creating admin
-
         if (userRepository.findByRole(Role.ADMIN).stream().findAny().isEmpty()) {
             User user = new User();
             user.setEmail("admin@gmail.com");
@@ -30,7 +26,6 @@ public class BootstrapConfig implements CommandLineRunner {
             userRepository.save(user);
         }
 
-        //two customers
         if (customerRepository.count() == 0) {
             Customer customer1 = new Customer();
             customer1.setEmail("customer1@gmail.com");
@@ -40,21 +35,23 @@ public class BootstrapConfig implements CommandLineRunner {
             customer1.setIsActive(true);
             customer1.setFirstName("Djoko");
             customer1.setLastName("Cvarkov");
-            customer1.setAddress("Peicevi Salasi");
-            customer1.setCardNumber("12341234");
-            customerRepository.save(customer1);
 
-            Customer customer2 = new Customer();
-            customer2.setEmail("customer2@gmail.com");
-            customer2.setUsername("customer2");
-            customer2.setPassword(passwordEncoder.encode("customer2"));
-            customer2.setRole(Role.CUSTOMER);
-            customer2.setIsActive(true);
-            customer2.setFirstName("Dragan");
-            customer2.setLastName("Torbica");
-            customer2.setAddress("Laze Stajica");
-            customer2.setCardNumber("56785678");
-            customerRepository.save(customer2);
+            Address address1 = new Address();
+            address1.setStreet("Vojvode Vlahovica");
+            address1.setCity("Belgrade");
+            address1.setState("Serbia");
+            address1.setZip("11000");
+            address1.setPhone("063603953");
+            customer1.setAddress(address1);
+
+            CardInfo cardInfo1 = new CardInfo();
+            cardInfo1.setCardNumber("1234123412341234");
+            cardInfo1.setCardHolder("Djoko Cvarkov");
+            cardInfo1.setExpiryDate("03/27");
+            cardInfo1.setCvv("357");
+            customer1.setCardInfo(cardInfo1);
+
+            customerRepository.save(customer1);
         }
     }
 }

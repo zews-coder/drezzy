@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import userservice.services.auth.JwtService;
 import userservice.utils.dtos.CreateCustomerDto;
 import userservice.services.CustomerService;
 
@@ -13,6 +14,7 @@ import userservice.services.CustomerService;
 @AllArgsConstructor
 public class CustomerController {
     private final CustomerService customerService;
+    private final JwtService jwtService;
 
     @GetMapping(path = "/getAll",
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -25,12 +27,24 @@ public class CustomerController {
         }
     }
 
+    @GetMapping(path = "/getOne",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "Get info from user")
+    public ResponseEntity<?> getCustomerInfo(@RequestHeader("Authorization") String authorizationHeader) {
+        try {
+            return ResponseEntity.ok(customerService.findCustomerInfo(jwtService.extractId(authorizationHeader.substring(7))));
+        }catch (Exception e) {
+            return badRequest("/getOne: " + e.getMessage());
+        }
+    }
+
     @PostMapping(path = "/createOne",
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Create new Customer")
     public ResponseEntity<?> createOne(@RequestBody CreateCustomerDto createCustomerDto) {
         try {
-            return ResponseEntity.ok(customerService.add(createCustomerDto));
+            customerService.add(createCustomerDto);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             return badRequest("/createOne");
         }
@@ -39,11 +53,11 @@ public class CustomerController {
     @PutMapping(path = "/updateOne",
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Update existing Customer")
-    public ResponseEntity<?> updateOne(@RequestBody CreateCustomerDto createCustomerDto) {
+    public ResponseEntity<?> updateOne(@RequestBody CreateCustomerDto createCustomerDto,@RequestHeader("Authorization") String authorizationHeader) {
         try {
-            return ResponseEntity.ok(customerService.update(createCustomerDto));
+            return ResponseEntity.ok(customerService.update(createCustomerDto, jwtService.extractId(authorizationHeader.substring(7))));
         } catch (Exception e) {
-            return badRequest("/updateOne");
+            return badRequest("/updateOne" + e.getMessage());
         }
     }
 

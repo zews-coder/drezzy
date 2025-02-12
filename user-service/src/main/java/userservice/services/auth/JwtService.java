@@ -41,6 +41,11 @@ public class JwtService {
         return Jwts.parser().verifyWith(getKey()).build().parseSignedClaims(token).getPayload();
     }
 
+    public Long extractId(String token) {
+        Map<String, Object> claims = extractAllClaims(token);
+        return Long.parseLong(claims.get("id").toString());
+    }
+
     public String extractSubject(String token) {
         return extractAllClaims(token).getSubject();
     }

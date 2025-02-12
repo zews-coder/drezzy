@@ -22,7 +22,7 @@ public class Article implements Serializable {
     private String description;
     private Date creationDate;
     private Double price;
-    private Integer discount;
+    private Integer discount = 0;
     @Enumerated
     private Sex sex;
     private Boolean visible = true;

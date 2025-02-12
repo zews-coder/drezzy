@@ -11,10 +11,9 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateCustomerDto implements Serializable {
+public class UserInfoDto implements Serializable {
     private String username;
     private String email;
-    private String password;
     private String firstName;
     private String lastName;
     private Address address;

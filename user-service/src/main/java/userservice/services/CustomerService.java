@@ -8,6 +8,7 @@ import userservice.entities.Customer;
 import userservice.entities.Role;
 import userservice.entities.User;
 import userservice.repositories.CustomerRepository;
+import userservice.utils.dtos.UserInfoDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,6 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
 
-
     public User getByEmail(String email) {
         Optional<Customer> customer = customerRepository.findByEmail(email);
         return customer.orElse(null);
@@ -29,7 +29,7 @@ public class CustomerService {
         return new ArrayList<>(customerRepository.findAll());
     }
 
-    public User add(CreateCustomerDto createCustomerDto) {
+    public void add(CreateCustomerDto createCustomerDto) {
             Customer customer = new Customer();
             customer.setEmail(createCustomerDto.getEmail());
             customer.setUsername(createCustomerDto.getUsername());
@@ -38,27 +38,57 @@ public class CustomerService {
             customer.setIsActive(true);
             customer.setFirstName(createCustomerDto.getFirstName());
             customer.setLastName(createCustomerDto.getLastName());
-            customer.setPhoneNumber(createCustomerDto.getPhoneNumber());
-            customer.setAddress(createCustomerDto.getAddress());
-            customer.setCardNumber(createCustomerDto.getCardNumber());
-            return customerRepository.save(customer);
+
+            if (createCustomerDto.getAddress() != null) {
+                customer.setAddress(createCustomerDto.getAddress());
+            }
+
+            if (createCustomerDto.getCardInfo() != null) {
+                customer.setCardInfo(createCustomerDto.getCardInfo());
+            }
+
+           customerRepository.save(customer);
     }
 
-    public User update(CreateCustomerDto createCustomerDto) {
+    public Customer update(CreateCustomerDto createCustomerDto, Long id) {
+        Customer customer = customerRepository.findById(id).get();
 
-            Customer customer = new Customer();
-            customer.setEmail(createCustomerDto.getEmail());
-            customer.setUsername(createCustomerDto.getUsername());
-            customer.setPassword(createCustomerDto.getPassword());
-            customer.setRole(Role.CUSTOMER);
-            customer.setIsActive(true);
-            customer.setFirstName(createCustomerDto.getFirstName());
-            customer.setLastName(createCustomerDto.getLastName());
-            customer.setPhoneNumber(createCustomerDto.getPhoneNumber());
+        customer.setUsername(createCustomerDto.getUsername());
+        customer.setEmail(createCustomerDto.getEmail());
+        if (createCustomerDto.getPassword() != null) {
+            customer.setPassword(passwordEncoder.encode(createCustomerDto.getPassword()));
+        }
+        customer.setFirstName(createCustomerDto.getFirstName());
+        customer.setLastName(createCustomerDto.getLastName());
+        if (createCustomerDto.getAddress() != null) {
             customer.setAddress(createCustomerDto.getAddress());
-            customer.setCardNumber(createCustomerDto.getCardNumber());
-            return customerRepository.save(customer);
+        }else {
+            customer.setAddress(null);
+        }
+        if (createCustomerDto.getCardInfo() != null) {
+            customer.setCardInfo(createCustomerDto.getCardInfo());
+        }else {
+            customer.setCardInfo(null);
+        }
 
+        return customerRepository.save(customer);
+    }
+
+    public UserInfoDto findCustomerInfo(Long id) {
+        Customer customer = customerRepository.findById(id).orElse(null);
+        UserInfoDto userInfoDto = new UserInfoDto();
+        userInfoDto.setFirstName(customer.getFirstName());
+        userInfoDto.setLastName(customer.getLastName());
+        userInfoDto.setEmail(customer.getEmail());
+        userInfoDto.setUsername(customer.getUsername());
+        if (customer.getAddress() != null) {
+            userInfoDto.setAddress(customer.getAddress());
+        }
+        if (customer.getCardInfo() != null) {
+            userInfoDto.setCardInfo(customer.getCardInfo());
+        }
+
+        return userInfoDto;
     }
 
     public void activate(Long id) {
