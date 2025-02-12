@@ -18,6 +18,7 @@ import java.util.List;
 public class BillService {
     private BillRepository billRepository;
     private ArticleRepository articleRepository;
+    private BagService bagService;
 
     /**GET**/
     public List<Bill> getAllBills() {
@@ -45,17 +46,23 @@ public class BillService {
         Bill bill = new Bill();
         Double price = 0.0;
         bill.setStatus(Status.PAID);
-        for (Long id : createBillDto.getArticleIds()){
-            if (articleRepository.findById(id).isPresent()){
-                Article article = articleRepository.findById(id).get();
+        for (String id : createBillDto.getArticleIds()){
+            if (articleRepository.findById(Long.valueOf(id)).isPresent()){
+                Article article = articleRepository.findById(Long.valueOf(id)).get();
                 bill.getArticleList().add(article);
-                price += article.getPrice();
+                if (article.getDiscount() == null || article.getDiscount() == 0){
+                    price += article.getPrice();
+                }else {
+                    price += article.getPrice() * (1 - (double) article.getDiscount() /100);
+                }
             }
         }
+        bill.setAddress(createBillDto.getAddress());
+        bill.setCardInfo(createBillDto.getCardInfo());
         bill.setPrice(price);
         bill.setDate(new Date());
         bill.setCustomerId(customerId);
-
+        bagService.removeAllBagArticles(customerId);
         return billRepository.save(bill);
     }
 

@@ -52,4 +52,12 @@ public class BagService {
             bagRepository.save(bag);
         }
     }
+
+    public void removeAllBagArticles(Long userId) {
+        if (bagRepository.findByUserId(userId).isPresent()){
+            Bag bag = bagRepository.findByUserId(userId).get();
+            bag.getArticleIds().clear();
+            bagRepository.save(bag);
+        }
+    }
 }

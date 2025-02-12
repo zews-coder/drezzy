@@ -25,4 +25,8 @@ public class Bill implements Serializable {
     private Date date;
     private Status status;
     private Double price;
+    @Embedded
+    private Address address;
+    @Embedded
+    private CardInfo cardInfo;
 }
