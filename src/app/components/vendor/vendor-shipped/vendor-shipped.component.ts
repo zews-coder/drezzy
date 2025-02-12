@@ -57,8 +57,7 @@ export class VendorShippedComponent implements OnInit{
     this.http.put(url, dto).subscribe({
       
       next: (response) => {
-        console.log('Status updated successfully:', response);
-        bill.status = newStatus; // Update UI after success
+        this.billsShipped = this.billsShipped.filter(b => b.id !== bill.id);
       },
       error: (error) => {
         console.error('Error updating status: vendor=shipped');

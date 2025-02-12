@@ -22,3 +22,9 @@ export interface SignUpDTO {
     address: Address;
     cardInfo: CardInfo;
   }
+
+  export interface BillRequest {
+    articleIds: string[];
+    address: Address;
+    cardInfo: CardInfo;
+  }

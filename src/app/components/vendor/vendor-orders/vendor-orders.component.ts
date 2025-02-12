@@ -31,7 +31,6 @@ export class VendorOrdersComponent implements OnInit{
     return new HttpHeaders();
   }
 
-  // Fetching bills from the provided URL
   fetchBills(): void {
     const headers = this.getAuthHeaders();
     this.http.get<Bill[]>('http://localhost:9090/api/v1/bills/getAllPaid', { headers }).subscribe(
@@ -44,7 +43,6 @@ export class VendorOrdersComponent implements OnInit{
     );
   }
 
-  // Function to set the bill status
   setStatus(bill: any, newStatus: string): void {
     const url = 'http://localhost:9090/api/v1/bills/changeStatus';
     const dto = {
@@ -55,8 +53,7 @@ export class VendorOrdersComponent implements OnInit{
     this.http.put(url, dto).subscribe({
       
       next: (response) => {
-        console.log('Status updated successfully:', response);
-        bill.status = newStatus; // Update UI after success
+        this.bills = this.bills.filter(b => b.id !== bill.id);
       },
       error: (error) => {
         console.error('Error updating status:', error);
@@ -64,8 +61,7 @@ export class VendorOrdersComponent implements OnInit{
     });
   }
 
-  // Set selectedBill to the clicked bill
   selectBill(bill: Bill): void {
-    this.selectedBill = bill;  // Set the clicked bill as selectedBill
+    this.selectedBill = bill; 
   }
 }

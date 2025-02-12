@@ -14,6 +14,7 @@ import { SignInComponent } from './components/customer/sign-in/sign-in.component
 import { UserComponent } from './components/customer/men/user/user.component';
 import { BagComponent } from './components/customer/men/bag/bag.component';
 import { WishlistComponent } from './components/customer/men/wishlist/wishlist.component';
+import { PaymentComponent } from './components/customer/payment/payment.component';
 
 import { SingleArticleComponent } from './components/customer/single-article/single-article.component';
 
@@ -42,6 +43,7 @@ export const routes: Routes = [
     { path: "customer-login", component: CustomerLoginComponent },
     { path: "customer-signin", component: SignInComponent },
     { path: "article", component: SingleArticleComponent },
+    { path: "payment", component: PaymentComponent },
 
     //VENDOR PAGES
     {

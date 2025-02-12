@@ -1,0 +1,82 @@
+/* Container */
+.container {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Table Styling */
+  .wishlist-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  .wishlist-table th, 
+  .wishlist-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .wishlist-table th {
+    background: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .wishlist-table tr:hover {
+    background: #f9f9f9;
+  }
+  
+  /* Image Styling */
+  .wishlist-table img {
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Price Styling */
+  .old-price {
+    text-decoration: line-through;
+    color: #b12704;
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  
+  .discounted-price {
+    color: #d32f2f;
+    font-weight: bold;
+  }
+  
+  /* Button Styling */
+  button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .remove-btn {
+    background: #ff5252;
+    color: white;
+    margin-right: 5px;
+  }
+  
+  .remove-btn:hover {
+    background: #d32f2f;
+  }
+  
+  .add-btn {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .add-btn:hover {
+    background: #388E3C;
+  }
+  

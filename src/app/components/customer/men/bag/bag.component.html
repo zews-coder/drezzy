@@ -1,13 +1,13 @@
 <app-navbar></app-navbar>
 
 <div class="container">
-    <table class="table table-striped">
+  <header><h3>Your shopping bag:</h3></header>
+    <table class="bag-table">
       <thead>
         <tr>
           <th>Image</th>
           <th>Title</th>
           <th>Price</th>
-          <th>Discount</th>
           <th>Size</th>
           <th>Actions</th>
         </tr>
@@ -15,16 +15,68 @@
       <tbody>
         <tr *ngFor="let article of articles">
           <td>
-            <img *ngIf="article.imageUrl" [src]="'data:image/jpeg;base64,' + article.imageUrl" alt="Article Image" style="max-width: 100px; max-height: 100px;"/>
+            <img *ngIf="article.imageUrl" [src]="'data:image/jpeg;base64,' + article.imageUrl" alt="Article Image"/>
           </td>
           <td>{{ article.title }}</td>
-          <td>{{ article.price }}</td>
-          <td>{{ article.discount }}%</td>
+          <td>
+            <span *ngIf="(article?.discount ?? 0) > 0" class="old-price">
+              ${{ article?.price ?? 0 }}
+            </span>
+            <span *ngIf="(article?.discount ?? 0) > 0" class="discounted-price">
+              ${{ ((article?.price ?? 0) * (1 - (article?.discount ?? 0) / 100)) | number:'1.2-2' }}
+            </span>  
+            <span *ngIf="!article?.discount || article?.discount === 0">
+              ${{ article?.price ?? 0 }}
+            </span>
+          </td>
           <td>{{ article.size }}</td>
           <td>
-            <button (click)="removeFromBag(article.id)">Remove</button>
+            <button class="remove-btn" (click)="removeFromBag(article.id)">Remove</button>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <div class="total-container">
+      <p class="total-price">Total: ${{ getTotalPrice() | number:'1.2-2' }}</p>
+      <button class="proceed-btn" (click)="proceedToPayment()">Proceed to Payment</button>
   </div>
+
+  <div class="user-container">
+    <div #paymentSection class="section">
+      <h3>Shipping Information</h3>
+      <label for="street">Street:</label>
+      <input type="text" id="street" [(ngModel)]="user.address.street" name="street" required />
+
+      <label for="city">City:</label>
+      <input type="text" id="city" [(ngModel)]="user.address.city" name="city" required />
+
+      <label for="state">State:</label>
+      <input type="text" id="state" [(ngModel)]="user.address.state" name="state" required />
+
+      <label for="zip">ZIP:</label>
+      <input type="text" id="zip" [(ngModel)]="user.address.zip" name="zip" required />
+
+      <label for="phone">Phone:</label>
+      <input type="text" id="phone" [(ngModel)]="user.address.phone" name="phone" required />
+    </div>
+
+    <div class="section">
+      <h3>Card Information</h3>
+      <label for="cardHolder">Card Holder:</label>
+      <input type="text" id="cardHolder" [(ngModel)]="user.cardInfo.cardHolder" name="cardHolder" required />
+
+      <label for="cardNumber">Card Number:</label>
+      <input type="text" id="cardNumber" [(ngModel)]="user.cardInfo.cardNumber" name="cardNumber" required />
+
+      <label for="expiryDate">Expiry Date:</label>
+      <input type="text" id="expiryDate" [(ngModel)]="user.cardInfo.expiryDate" name="expiryDate" required />
+
+      <label for="cvv">CVV:</label>
+      <input type="text" id="cvv" [(ngModel)]="user.cardInfo.cvv" name="cvv" required />
+    </div>
+    <div>
+      <button class="dugme" (click)="makeBill()" [disabled]="!isFormValid()">PAY ORDER</button>
+    </div>
+</div>
+</div>
