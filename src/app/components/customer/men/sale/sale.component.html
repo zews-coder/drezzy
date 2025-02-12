@@ -6,6 +6,7 @@
     <div class="articles-grid">
       <app-card-view
         *ngFor="let article of articles"
+        [id]="article.id"
         [imageUrl]="article.imageUrl"
         [title]="article.title"
         [price]="article.price"

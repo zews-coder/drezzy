@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { NavbarComponent } from "../men/navbar/navbar.component";
 
 @Component({
   selector: 'app-customer-login',
-  imports: [HttpClientModule, FormsModule],
+  imports: [HttpClientModule, FormsModule, NavbarComponent, RouterModule],
   templateUrl: './customer-login.component.html',
   styleUrl: './customer-login.component.css'
 })
@@ -29,7 +31,6 @@ export class CustomerLoginComponent {
       next: (response) => {
         if (response.token) {
           this.authService.setJwt(response.token);
-          console.log('Token saved to session storage:', response.token);
           this.router.navigate(['/']);
         } else {
           console.error('Token not found in response');

@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+<div class="signup-container">
+    <h2>Create an Account</h2>
+  
+    <form (ngSubmit)="onSubmit()">
+      <!-- Personal Information Section -->
+      <div class="form-section">
+        <h3>Personal Information</h3>
+        <input type="text" placeholder="Username" [(ngModel)]="user.username" name="username" required>
+        <input type="email" placeholder="Email" [(ngModel)]="user.email" name="email" required>
+        <input type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required>
+        <input type="password" placeholder="Confirm Password" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+        <input type="text" placeholder="First Name" [(ngModel)]="user.firstName" name="firstName" required>
+        <input type="text" placeholder="Last Name" [(ngModel)]="user.lastName" name="lastName" required>
+      </div>
+  
+      <!-- Address Information Section -->
+      <div class="form-section">
+        <h3>Address Information</h3>
+        <input type="text" placeholder="Street" [(ngModel)]="user.address.street" name="street" required>
+        <input type="text" placeholder="City" [(ngModel)]="user.address.city" name="city" required>
+        <input type="text" placeholder="State" [(ngModel)]="user.address.state" name="state" required>
+        <input type="text" placeholder="ZIP Code" [(ngModel)]="user.address.zip" name="zip" required>
+        <input type="text" placeholder="Phone Number" [(ngModel)]="user.address.phone" name="phone" required>
+      </div>
+  
+      <!-- Card Information Section -->
+      <div class="form-section">
+        <h3>Card Information</h3>
+        <input type="text" placeholder="Cardholder Name" [(ngModel)]="user.cardInfo.cardHolder" name="cardHolder" required>
+        <input type="text" placeholder="Card Number" [(ngModel)]="user.cardInfo.cardNumber" name="cardNumber" required>
+        <input type="text" placeholder="Expiry Date (MM/YY)" [(ngModel)]="user.cardInfo.expiryDate" name="expiryDate" required>
+        <input type="text" placeholder="CVV" [(ngModel)]="user.cardInfo.cvv" name="cvv" required>
+      </div>
+  
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn">Create Account</button>
+    </form>
+  </div>
+  

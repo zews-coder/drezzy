@@ -27,7 +27,6 @@ export class SingleArticleComponent implements OnInit{
 
   private getAuthHeaders() {
       const token = this.authService.getJwt();
-      console.log("dodajem token:" + token);
       return new HttpHeaders({
         'Authorization': token ? `Bearer ${token}` : '',
       });

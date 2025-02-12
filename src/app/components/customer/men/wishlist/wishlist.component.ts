@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { SingleArticle } from '../../../../models/Vendor';
 import { AuthService } from '../../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-wishlist',
@@ -14,10 +15,14 @@ import { AuthService } from '../../../../services/auth.service';
 export class WishlistComponent implements OnInit{
   articles: SingleArticle[] = [];
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {}
   
   ngOnInit(): void {
-    this.fetchWishlist();
+    if(this.authService.getJwt() == ''){
+      this.router.navigate(['/customer-login']);
+    }else{
+      this.fetchWishlist();
+    }
   }
 
   private getAuthHeaders() {

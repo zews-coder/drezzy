@@ -1,1 +1,57 @@
-<p>user works!</p>
+<app-navbar></app-navbar>
+<div class="user-container">
+    <h2>User Profile</h2>
+  
+    <form #userForm="ngForm">
+      <div class="section">
+        <h3>Personal Information</h3>
+        <label for="username">Username:</label>
+        <input type="text" id="username" [(ngModel)]="user.username" name="username" required />
+  
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="user.email" name="email" required />
+  
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" [(ngModel)]="user.firstName" name="firstName" required />
+  
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" [(ngModel)]="user.lastName" name="lastName" required />
+      </div>
+  
+      <div class="section">
+        <h3>Address Information</h3>
+        <label for="street">Street:</label>
+        <input type="text" id="street" [(ngModel)]="user.address.street" name="street" required />
+  
+        <label for="city">City:</label>
+        <input type="text" id="city" [(ngModel)]="user.address.city" name="city" required />
+  
+        <label for="state">State:</label>
+        <input type="text" id="state" [(ngModel)]="user.address.state" name="state" required />
+  
+        <label for="zip">ZIP:</label>
+        <input type="text" id="zip" [(ngModel)]="user.address.zip" name="zip" required />
+  
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" [(ngModel)]="user.address.phone" name="phone" required />
+      </div>
+  
+      <div class="section">
+        <h3>Card Information</h3>
+        <label for="cardHolder">Card Holder:</label>
+        <input type="text" id="cardHolder" [(ngModel)]="user.cardInfo.cardHolder" name="cardHolder" required />
+  
+        <label for="cardNumber">Card Number:</label>
+        <input type="text" id="cardNumber" [(ngModel)]="user.cardInfo.cardNumber" name="cardNumber" required />
+  
+        <label for="expiryDate">Expiry Date:</label>
+        <input type="text" id="expiryDate" [(ngModel)]="user.cardInfo.expiryDate" name="expiryDate" required />
+  
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" [(ngModel)]="user.cardInfo.cvv" name="cvv" required />
+      </div>
+  
+      <button type="button" (click)="saveChanges()">Save Changes</button>
+    </form>
+  </div>
+  

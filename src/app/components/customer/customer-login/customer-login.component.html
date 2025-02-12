@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="container mt-5">
     <h2>Customer Login</h2>
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
@@ -27,4 +28,5 @@
         Login
       </button>
     </form>
+    <span>Don't have account? <a routerLink="/customer-signin" routerLinkActive="active">Sign Up</a></span>
   </div>

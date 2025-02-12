@@ -9,6 +9,7 @@ import { NewComponent } from './components/customer/men/new/new.component';
 import { SaleComponent } from './components/customer/men/sale/sale.component';
 import { ShoesComponent } from './components/customer/men/shoes/shoes.component';
 import { TrendsComponent } from './components/customer/men/trends/trends.component';
+import { SignInComponent } from './components/customer/sign-in/sign-in.component';
 
 import { UserComponent } from './components/customer/men/user/user.component';
 import { BagComponent } from './components/customer/men/bag/bag.component';
@@ -39,6 +40,7 @@ export const routes: Routes = [
     { path: 'men/bag', component: BagComponent },
     { path: 'men/user', component: UserComponent },
     { path: "customer-login", component: CustomerLoginComponent },
+    { path: "customer-signin", component: SignInComponent },
     { path: "article", component: SingleArticleComponent },
 
     //VENDOR PAGES
