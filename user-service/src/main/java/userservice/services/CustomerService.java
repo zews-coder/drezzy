@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import userservice.utils.dtos.CreateCustomerDto;
 import userservice.entities.Customer;
-import userservice.entities.Role;
+import userservice.entities.enums.Role;
 import userservice.entities.User;
 import userservice.repositories.CustomerRepository;
 import userservice.utils.dtos.UserInfoDto;

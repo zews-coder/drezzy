@@ -1,12 +1,15 @@
 package shoppingservice.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.stereotype.Service;
 import shoppingservice.enitites.Article;
 import shoppingservice.enitites.Bill;
 import shoppingservice.enitites.enums.Status;
 import shoppingservice.repositories.ArticleRepository;
 import shoppingservice.repositories.BillRepository;
+import shoppingservice.utils.dtos.ArticleForBillDto;
+import shoppingservice.utils.dtos.BillDto;
 import shoppingservice.utils.dtos.CreateBillDto;
 
 import java.util.ArrayList;
@@ -19,6 +22,7 @@ public class BillService {
     private BillRepository billRepository;
     private ArticleRepository articleRepository;
     private BagService bagService;
+    private AmqpTemplate amqpTemplate;
 
     /**GET**/
     public List<Bill> getAllBills() {
@@ -63,6 +67,8 @@ public class BillService {
         bill.setDate(new Date());
         bill.setCustomerId(customerId);
         bagService.removeAllBagArticles(customerId);
+
+        sendBillToQueue(bill);
         return billRepository.save(bill);
     }
 
@@ -72,5 +78,23 @@ public class BillService {
             bill.setStatus(status);
             billRepository.save(bill);
         }
+    }
+
+    private void sendBillToQueue(Bill bill) {
+        BillDto billDto = new BillDto();
+        billDto.setUserId(bill.getCustomerId());
+        billDto.setDate(bill.getDate().getTime());
+        billDto.setPrice(bill.getPrice());
+        billDto.setAddress(bill.getAddress());
+        billDto.setCardInfo(bill.getCardInfo());
+        List<ArticleForBillDto> articleForBillDtoList = new ArrayList<>();
+        for (Article article : bill.getArticleList()){
+            ArticleForBillDto articleForBillDto = new ArticleForBillDto();
+            articleForBillDto.setTitle(article.getTitle());
+            articleForBillDto.setPrice(article.getPrice());
+            articleForBillDtoList.add(articleForBillDto);
+        }
+        billDto.setArticleForBillDtos(articleForBillDtoList);
+        amqpTemplate.convertAndSend("billQueue", billDto);
     }
 }

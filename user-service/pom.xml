@@ -16,6 +16,11 @@
     <description>User Service Module</description>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
         <!--Jwt-->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

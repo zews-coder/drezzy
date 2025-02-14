@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import userservice.entities.*;
+import userservice.entities.enums.Role;
 import userservice.repositories.CustomerRepository;
 import userservice.repositories.UserRepository;
 

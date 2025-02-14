@@ -39,6 +39,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/customer/getOne").permitAll()
                         .requestMatchers("/api/v1/customer/createOne").permitAll()
                         .requestMatchers("/api/v1/customer/updateOne").permitAll()
+                        .requestMatchers("/email/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

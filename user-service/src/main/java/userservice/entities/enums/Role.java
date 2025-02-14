@@ -1,4 +1,4 @@
-package userservice.entities;
+package userservice.entities.enums;
 
 public enum Role {
     ADMIN,
