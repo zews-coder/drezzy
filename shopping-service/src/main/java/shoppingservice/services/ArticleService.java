@@ -2,13 +2,13 @@ package shoppingservice.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import shoppingservice.enitites.Article;
-import shoppingservice.enitites.ArticleClothes;
-import shoppingservice.enitites.ArticleShoes;
+import shoppingservice.enitites.articles.Article;
+import shoppingservice.enitites.articles.ArticleClothes;
+import shoppingservice.enitites.articles.ArticleShoes;
 import shoppingservice.repositories.ArticleRepository;
 import shoppingservice.repositories.ClothesRepository;
 import shoppingservice.repositories.ShoesRepository;
-import shoppingservice.utils.dtos.ArticlesWithImageDto;
+import shoppingservice.utils.dtos.articles.ArticlesWithImageDto;
 import shoppingservice.utils.dtos.CustomerArticleDto;
 
 import java.util.ArrayList;

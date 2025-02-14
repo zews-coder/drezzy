@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import shoppingservice.services.ClothesService;
 import shoppingservice.services.JwtService;
-import shoppingservice.utils.dtos.CreateClothesDto;
+import shoppingservice.utils.dtos.clothes.CreateClothesDto;
 
 @RestController
 @RequestMapping("/api/v1/clothes")

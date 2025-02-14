@@ -3,14 +3,13 @@ package shoppingservice.services;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import shoppingservice.enitites.ArticleClothes;
+import shoppingservice.enitites.articles.ArticleClothes;
 import shoppingservice.enitites.enums.Sex;
 import shoppingservice.enitites.enums.SubtypeClothes;
 import shoppingservice.repositories.ClothesRepository;
-import shoppingservice.utils.dtos.ArticlesWithImageDto;
-import shoppingservice.utils.dtos.CreateClothesDto;
+import shoppingservice.utils.dtos.articles.ArticlesWithImageDto;
+import shoppingservice.utils.dtos.clothes.CreateClothesDto;
 import shoppingservice.utils.dtos.CustomerArticleDto;
-import shoppingservice.utils.mappers.ArticleMapper;
 import shoppingservice.utils.mappers.ClothesArticleMapper;
 
 import java.io.IOException;

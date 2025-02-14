@@ -3,6 +3,8 @@ package userservice.entities;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import lombok.*;
+import userservice.entities.embedded.Address;
+import userservice.entities.embedded.CardInfo;
 
 import java.io.Serializable;
 

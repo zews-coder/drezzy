@@ -1,10 +1,10 @@
-package userservice.entities;
+package shoppingservice.enitites.articles;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import userservice.entities.enums.Sex;
+import shoppingservice.enitites.enums.Sex;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -23,8 +23,9 @@ public class Article implements Serializable {
     private Date creationDate;
     private Double price;
     private Integer discount = 0;
-    private Boolean visible = true;
+    @Enumerated
     private Sex sex;
+    private Boolean visible = true;
     @Lob
     private byte[] image;
     private Integer visited = 0;

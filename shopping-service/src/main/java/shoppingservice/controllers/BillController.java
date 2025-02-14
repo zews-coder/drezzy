@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import shoppingservice.enitites.enums.Status;
 import shoppingservice.services.BillService;
 import shoppingservice.services.JwtService;
-import shoppingservice.utils.dtos.ChangeBillStatusDto;
-import shoppingservice.utils.dtos.CreateBillDto;
+import shoppingservice.utils.dtos.bill.ChangeBillStatusDto;
+import shoppingservice.utils.dtos.bill.CreateBillDto;
 
 @RestController
 @RequestMapping("/api/v1/bills")

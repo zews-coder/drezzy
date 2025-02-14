@@ -2,7 +2,7 @@ package shoppingservice.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import shoppingservice.enitites.ArticleShoes;
+import shoppingservice.enitites.articles.ArticleShoes;
 import shoppingservice.enitites.enums.Sex;
 import shoppingservice.enitites.enums.SubtypeShoes;
 

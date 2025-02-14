@@ -1,7 +1,6 @@
-package shoppingservice.utils.dtos;
+package shoppingservice.utils.dtos.clothes;
 
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
 import shoppingservice.enitites.enums.Sex;
 import shoppingservice.enitites.enums.SubtypeClothes;
 

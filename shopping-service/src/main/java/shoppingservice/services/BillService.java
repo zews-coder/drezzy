@@ -3,14 +3,14 @@ package shoppingservice.services;
 import lombok.AllArgsConstructor;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.stereotype.Service;
-import shoppingservice.enitites.Article;
+import shoppingservice.enitites.articles.Article;
 import shoppingservice.enitites.Bill;
 import shoppingservice.enitites.enums.Status;
 import shoppingservice.repositories.ArticleRepository;
 import shoppingservice.repositories.BillRepository;
-import shoppingservice.utils.dtos.ArticleForBillDto;
-import shoppingservice.utils.dtos.BillDto;
-import shoppingservice.utils.dtos.CreateBillDto;
+import shoppingservice.utils.dtos.articles.ArticleForBillDto;
+import shoppingservice.utils.dtos.bill.BillDto;
+import shoppingservice.utils.dtos.bill.CreateBillDto;
 
 import java.util.ArrayList;
 import java.util.Date;

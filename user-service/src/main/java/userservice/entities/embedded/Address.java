@@ -1,4 +1,4 @@
-package shoppingservice.enitites;
+package userservice.entities.embedded;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -11,9 +11,10 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CardInfo implements Serializable {
-    private String cardHolder;
-    private String cardNumber;
-    private String expiryDate;
-    private String cvv;
+public class Address implements Serializable {
+    private String street;
+    private String city;
+    private String state;
+    private String zip;
+    private String phone;
 }

@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import shoppingservice.enitites.Article;
 import shoppingservice.services.ArticleService;
 import shoppingservice.services.ClothesService;
 import shoppingservice.services.ShoesService;

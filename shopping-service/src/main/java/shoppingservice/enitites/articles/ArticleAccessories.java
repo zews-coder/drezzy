@@ -1,4 +1,4 @@
-package shoppingservice.enitites;
+package shoppingservice.enitites.articles;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
@@ -6,15 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import shoppingservice.enitites.enums.SubtypeShoes;
+import shoppingservice.enitites.enums.SubtypeAccessories;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ArticleShoes extends Article {
+public class ArticleAccessories extends Article {
     @Enumerated
-    private SubtypeShoes subtype;
-    private Integer size;
+    private SubtypeAccessories subtype;
 }

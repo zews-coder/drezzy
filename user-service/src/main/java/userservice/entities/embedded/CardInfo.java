@@ -1,4 +1,4 @@
-package userservice.entities;
+package userservice.entities.embedded;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

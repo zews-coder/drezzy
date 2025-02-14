@@ -1,4 +1,4 @@
-package shoppingservice.utils.dtos;
+package shoppingservice.utils.dtos.bill;
 
 import lombok.Data;
 

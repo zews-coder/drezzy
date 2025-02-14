@@ -1,8 +1,8 @@
-package shoppingservice.utils.dtos;
+package shoppingservice.utils.dtos.bill;
 
 import lombok.*;
-import shoppingservice.enitites.Address;
-import shoppingservice.enitites.CardInfo;
+import shoppingservice.enitites.embedded.Address;
+import shoppingservice.enitites.embedded.CardInfo;
 
 import java.io.Serializable;
 import java.util.List;

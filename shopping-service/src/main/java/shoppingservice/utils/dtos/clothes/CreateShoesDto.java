@@ -1,4 +1,4 @@
-package shoppingservice.utils.dtos;
+package shoppingservice.utils.dtos.clothes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

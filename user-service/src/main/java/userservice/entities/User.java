@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import userservice.entities.enums.Role;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -24,4 +26,6 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
     private Boolean isActive;
+    @OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Bill> bills = new HashSet<>();
 }

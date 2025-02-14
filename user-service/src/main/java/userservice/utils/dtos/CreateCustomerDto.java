@@ -3,8 +3,8 @@ package userservice.utils.dtos;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import userservice.entities.Address;
-import userservice.entities.CardInfo;
+import userservice.entities.embedded.Address;
+import userservice.entities.embedded.CardInfo;
 
 import java.io.Serializable;
 

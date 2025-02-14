@@ -1,4 +1,4 @@
-package shoppingservice.enitites;
+package shoppingservice.enitites.articles;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;

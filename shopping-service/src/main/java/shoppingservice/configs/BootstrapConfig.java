@@ -3,7 +3,7 @@ package shoppingservice.configs;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import shoppingservice.enitites.ArticleClothes;
+import shoppingservice.enitites.articles.ArticleClothes;
 import shoppingservice.enitites.enums.Sex;
 import shoppingservice.enitites.enums.SubtypeClothes;
 import shoppingservice.repositories.ClothesRepository;

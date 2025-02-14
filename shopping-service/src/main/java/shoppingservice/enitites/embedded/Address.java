@@ -1,4 +1,4 @@
-package shoppingservice.enitites;
+package shoppingservice.enitites.embedded;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
