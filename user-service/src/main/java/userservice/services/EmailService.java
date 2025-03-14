@@ -132,7 +132,7 @@ public class EmailService {
         twoColTable3.addCell(getCell10fLeft( "****" + billDto.getCardInfo().getCardNumber().substring(12,16),  false));
         document.add(twoColTable3);
 
-        float oneColoumnwidth[]={twocol150};
+        float[] oneColoumnwidth = {twocol150};
 
         Table oneColTable1=new Table(oneColoumnwidth);
         oneColTable1.addCell(getCell10fLeft(  "Phone",  true));
@@ -178,7 +178,6 @@ public class EmailService {
         document.add(tableDivider2);
         document.add(new Paragraph( "\n"));
         document.add(divider.setBorder(new SolidBorder(Color.GRAY, 1)).setMarginBottom(15f));
-
 
         /// END ///
         document.close();

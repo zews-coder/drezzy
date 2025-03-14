@@ -50,8 +50,11 @@ public class CustomerService {
            customerRepository.save(customer);
     }
 
-    public Customer update(CreateCustomerDto createCustomerDto, Long id) {
-        Customer customer = customerRepository.findById(id).get();
+    public void update(CreateCustomerDto createCustomerDto, Long id) {
+        Customer customer = customerRepository.findById(id).orElse(null);
+        if (customer == null) {
+            return;
+        }
 
         customer.setUsername(createCustomerDto.getUsername());
         customer.setEmail(createCustomerDto.getEmail());
@@ -71,21 +74,23 @@ public class CustomerService {
             customer.setCardInfo(null);
         }
 
-        return customerRepository.save(customer);
+        customerRepository.save(customer);
     }
 
     public UserInfoDto findCustomerInfo(Long id) {
         Customer customer = customerRepository.findById(id).orElse(null);
         UserInfoDto userInfoDto = new UserInfoDto();
-        userInfoDto.setFirstName(customer.getFirstName());
-        userInfoDto.setLastName(customer.getLastName());
-        userInfoDto.setEmail(customer.getEmail());
-        userInfoDto.setUsername(customer.getUsername());
-        if (customer.getAddress() != null) {
-            userInfoDto.setAddress(customer.getAddress());
-        }
-        if (customer.getCardInfo() != null) {
-            userInfoDto.setCardInfo(customer.getCardInfo());
+        if (customer != null) {
+            userInfoDto.setFirstName(customer.getFirstName());
+            userInfoDto.setLastName(customer.getLastName());
+            userInfoDto.setEmail(customer.getEmail());
+            userInfoDto.setUsername(customer.getUsername());
+            if (customer.getAddress() != null) {
+                userInfoDto.setAddress(customer.getAddress());
+            }
+            if (customer.getCardInfo() != null) {
+                userInfoDto.setCardInfo(customer.getCardInfo());
+            }
         }
 
         return userInfoDto;

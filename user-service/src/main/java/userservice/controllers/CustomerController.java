@@ -38,8 +38,7 @@ public class CustomerController {
         }
     }
 
-    @PostMapping(path = "/createOne",
-            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/createOne", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Create new Customer")
     public ResponseEntity<?> createOne(@RequestBody CreateCustomerDto createCustomerDto) {
         try {
@@ -50,12 +49,12 @@ public class CustomerController {
         }
     }
 
-    @PutMapping(path = "/updateOne",
-            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/updateOne", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Update existing Customer")
     public ResponseEntity<?> updateOne(@RequestBody CreateCustomerDto createCustomerDto,@RequestHeader("Authorization") String authorizationHeader) {
         try {
-            return ResponseEntity.ok(customerService.update(createCustomerDto, jwtService.extractId(authorizationHeader.substring(7))));
+            customerService.update(createCustomerDto, jwtService.extractId(authorizationHeader.substring(7)));
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
             return badRequest("/updateOne" + e.getMessage());
         }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import shoppingservice.enitites.Bag;
 import shoppingservice.enitites.enums.Sex;
 
 import java.io.Serializable;
@@ -29,4 +30,14 @@ public class Article implements Serializable {
     @Lob
     private byte[] image;
     private Integer visited = 0;
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY, optional = false)
+    private Bag ak;
+
+    public Bag getAk() {
+        return ak;
+    }
+
+    public void setAk(Bag ak) {
+        this.ak = ak;
+    }
 }

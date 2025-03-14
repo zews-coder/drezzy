@@ -31,7 +31,15 @@ public class ShoesService {
         articleShoes.setVisited(articleShoes.getVisited()+1);
         shoesRepository.save(articleShoes);
         CustomerArticleDto customerArticleDto = ArticleMapper.INSTANCE.shoesArticleToCustomerArticleDto(articleShoes);
-        customerArticleDto.setImageUrl(Base64.getEncoder().encodeToString(articleShoes.getImage()));
+        customerArticleDto.setId(articleShoes.getId());
+        customerArticleDto.setTitle(articleShoes.getTitle());
+        customerArticleDto.setDescription(articleShoes.getDescription());
+        customerArticleDto.setPrice(articleShoes.getPrice());
+        customerArticleDto.setDiscount(articleShoes.getDiscount());
+        customerArticleDto.setSize(String.valueOf(articleShoes.getSize()));
+        if (articleShoes.getImage() != null) {
+            customerArticleDto.setImageUrl(Base64.getEncoder().encodeToString(articleShoes.getImage()));
+        }
         return customerArticleDto;
     }
 
@@ -56,6 +64,16 @@ public class ShoesService {
 
         for (ArticleShoes articleShoes : articleShoesList) {
             ArticlesWithImageDto articlesWithImageDto = ArticleMapper.INSTANCE.shoesToArticlesWithImageDto(articleShoes);
+            articlesWithImageDto.setId(articleShoes.getId());
+            articlesWithImageDto.setTitle(articleShoes.getTitle());
+            articlesWithImageDto.setDescription(articleShoes.getDescription());
+            articlesWithImageDto.setCreationDate(articleShoes.getCreationDate());
+            articlesWithImageDto.setPrice(articleShoes.getPrice());
+            articlesWithImageDto.setDiscount(articleShoes.getDiscount());
+            articlesWithImageDto.setSex(articleShoes.getSex());
+            articlesWithImageDto.setVisible(articleShoes.getVisible());
+            articlesWithImageDto.setSubtype(articleShoes.getSubtype().toString());
+            articlesWithImageDto.setSize(String.valueOf(articleShoes.getSize()));
             if (articleShoes.getImage() != null) {
                 articlesWithImageDto.setImageUrl(Base64.getEncoder().encodeToString(articleShoes.getImage()));
             }
