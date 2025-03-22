@@ -18,7 +18,7 @@ public class ArticleMenController {
     private final ArticleService articleService;
 
     @GetMapping(path = "/article/{id}",  produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(summary = "check in bote repositories for article")
+    @Operation(summary = "check in both repositories for article")
     public ResponseEntity<?> getArticle(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(articleService.getArticle(id));

@@ -49,7 +49,7 @@ public class EmailService {
 //        message.setText(text);
 //        emailSender.send(message);
 //    }
-    @RabbitListener(queues = "billQueue")
+//    @RabbitListener(queues = "billQueue")
     public void receiveMessage(BillDto billDto) throws FileNotFoundException, MessagingException {
         Bill bill = new Bill();
         bill.setCustomerId(userService.getById(billDto.getUserId()));

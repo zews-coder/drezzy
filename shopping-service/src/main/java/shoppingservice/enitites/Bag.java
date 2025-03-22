@@ -4,10 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import shoppingservice.enitites.articles.Article;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,6 +19,4 @@ public class Bag implements Serializable {
     private Long id;
     private Long userId;
     private Set<String> articleIds = new HashSet<>();
-    @ManyToMany(cascade = CascadeType.DETACH)
-    private Collection<Article> articles;
 }

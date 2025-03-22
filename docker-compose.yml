@@ -1,0 +1,46 @@
+
+services:
+
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: drezzy  # Shared database
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql:/var/lib/mysql
+
+  user-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: user-service
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/drezzy
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8080:8080"
+
+  shopping-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: shopping-service
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/drezzy
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "9090:9090"
+
+volumes:
+  mysql:
