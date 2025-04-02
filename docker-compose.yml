@@ -3,6 +3,7 @@ services:
 
   mysql:
     image: mysql
+    container_name: mysql
     restart: always
     environment:
       MYSQL_DATABASE: drezzy  # Shared database
@@ -11,36 +12,75 @@ services:
       - "3306:3306"
     volumes:
       - mysql:/var/lib/mysql
+    networks:
+      - drezzy-network
+
+  #rabiitMQ
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - drezzy-network
 
   user-service:
     build:
       context: .
       dockerfile: Dockerfile
       target: user-service
+    container_name: user-service
     restart: always
     depends_on:
       - mysql
+      - rabbitmq
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/drezzy
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
     ports:
       - "8080:8080"
+    networks:
+      - drezzy-network
 
   shopping-service:
     build:
       context: .
       dockerfile: Dockerfile
       target: shopping-service
+    container_name: shopping-service
     restart: always
     depends_on:
       - mysql
+      - rabbitmq
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/drezzy
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
     ports:
       - "9090:9090"
+    networks:
+      - drezzy-network
+
+  #Frontend
+  angular-frontend:
+    build:
+      context: ../drezzy-frontend
+      dockerfile: ../drezzy-frontend/Dockerfile
+    container_name: angular-frontend
+    ports:
+      - "80:80"
+    networks:
+      - drezzy-network
+
+networks:
+  drezzy-network:
 
 volumes:
   mysql:
