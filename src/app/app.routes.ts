@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-
 import { CustomerLoginComponent } from './components/customer/customer-login/customer-login.component';
 import { AccessoriesComponent } from './components/customer/men/accessories/accessories.component';
 import { ClothingComponent } from './components/customer/men/clothing/clothing.component';
@@ -10,14 +9,11 @@ import { SaleComponent } from './components/customer/men/sale/sale.component';
 import { ShoesComponent } from './components/customer/men/shoes/shoes.component';
 import { TrendsComponent } from './components/customer/men/trends/trends.component';
 import { SignInComponent } from './components/customer/sign-in/sign-in.component';
-
 import { UserComponent } from './components/customer/men/user/user.component';
 import { BagComponent } from './components/customer/men/bag/bag.component';
 import { WishlistComponent } from './components/customer/men/wishlist/wishlist.component';
 import { PaymentComponent } from './components/customer/payment/payment.component';
-
 import { SingleArticleComponent } from './components/customer/single-article/single-article.component';
-
 import { VendorLoginComponent } from './components/vendor/vendor-login/vendor-login.component';
 import { VendorHomeComponent } from './components/vendor/vendor-home/vendor-home.component';
 import { VendorArticlesComponent } from './components/vendor/vendor-articles/vendor-articles.component';
@@ -44,38 +40,13 @@ export const routes: Routes = [
     { path: "customer-signin", component: SignInComponent },
     { path: "article", component: SingleArticleComponent },
     { path: "payment", component: PaymentComponent },
-
     //VENDOR PAGES
-    {
-        path: "vendor-stats",
-        component: StatsComponent
-    },
-    {
-        path: "vendor-history",
-        component: VendorHistoryComponent
-    },
-    {
-        path: "vendor-shipped",
-        component: VendorShippedComponent
-    },
-    {
-        path: "vendor-orders",
-        component: VendorOrdersComponent
-    },
-    {
-        path: "vendor-add",
-        component: VendorAddComponent
-    },
-    {
-        path: "vendor-articles",
-        component: VendorArticlesComponent
-    },
-    {
-        path: "vendor-home",
-        component: VendorHomeComponent
-    },
-    {
-        path: "vendor-login",
-        component: VendorLoginComponent
-    },
+    { path: "vendor-stats", component: StatsComponent },
+    { path: "vendor-history", component: VendorHistoryComponent },
+    { path: "vendor-shipped", component: VendorShippedComponent },
+    { path: "vendor-orders",component: VendorOrdersComponent},
+    { path: "vendor-add",component: VendorAddComponent},
+    { path: "vendor-articles", component: VendorArticlesComponent},
+    { path: "vendor-home",component: VendorHomeComponent},
+    { path: "vendor-login",component: VendorLoginComponent},
 ];

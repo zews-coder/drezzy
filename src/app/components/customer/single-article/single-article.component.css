@@ -78,5 +78,12 @@
   .bag-button:hover {
     background-color: #007bff;
   }
+    .size-dropdown {
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
   
   

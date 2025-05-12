@@ -1,29 +1,3 @@
-// import { Injectable } from '@angular/core';
-
-// @Injectable({
-//   providedIn: 'root' // This makes the service available globally
-// })
-// export class AuthService {
-//   private jwt: string = ''; // Private field to store JWT
-
-//   constructor() {}
-
-//   // Function to set the JWT token
-//   setJwt(token: string): void {
-//     sessionStorage.setItem("token", token);
-//     this.jwt = token;
-//   }
-
-//   // Function to get the JWT token
-//   getJwt(): string {
-//     return sessionStorage.getItem("token") ?? this.jwt;
-//   }
-
-//   removeJwt(){
-//     sessionStorage.removeItem("token");
-//     this.jwt = '';
-//   }
-// }
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 

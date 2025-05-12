@@ -19,7 +19,13 @@
         </span>
       </p>
   
-      <p class="size"><strong>Size:</strong> {{ article?.size }}</p>
+      <!-- <p class="size"><strong>Size:</strong> {{ article?.size }}</p>-->
+      <label for="size"><strong>Size:</strong></label>
+      <select id="size" class="size-dropdown">
+        <option *ngFor="let size of ['S', 'M', 'L','XL']" [value]="size">
+          {{ size }}
+        </option>
+      </select>
       <p class="description">{{ article?.description }}</p>
 
       <div class="button-container">

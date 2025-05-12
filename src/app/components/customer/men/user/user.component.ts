@@ -66,7 +66,7 @@ export class UserComponent implements OnInit{
   saveChanges(): void {
     this.http.put<SignUpDTO>('http://localhost:8080/api/v1/customer/updateOne', this.user, { headers: this.getAuthHeaders() }).subscribe({
       next: (response) => {
-        console.log('User data updated successfully:', response);
+        this.fetchUserData();
         alert('Changes saved successfully!');
       },
       error: (err) => {

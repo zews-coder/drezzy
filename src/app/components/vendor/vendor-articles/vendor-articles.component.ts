@@ -5,7 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { VendorArticles } from '../../../models/Vendor'
 import { VendorHomeComponent } from "../vendor-home/vendor-home.component";
 import { DateFormatPipe } from '../../../pipes/date-format.pipe'
-import { FormsModule } from '@angular/forms'; // <-- Import FormsModule
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-vendor-articles',
@@ -17,17 +18,17 @@ export class VendorArticlesComponent implements OnInit{
   articles: VendorArticles[] = [];
   discountInputs: { [key: string]: number } = {}; // Use string keys
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit(): void {
    this.fetchVendorArticles();
   }
 
   private getAuthHeaders() {
-      const token = sessionStorage.getItem('token');
+      const token = this.authService.getJwt();
       return new HttpHeaders({
-        'Authorization': token ? `Bearer ${token}` : '',
-      });
+      'Authorization': token ? `Bearer ${token}` : '',
+    });
   }
 
   fetchVendorArticles() {

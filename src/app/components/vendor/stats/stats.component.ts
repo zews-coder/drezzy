@@ -56,5 +56,4 @@ export class StatsComponent implements OnInit{
       (error) => console.error('Error fetching orders by status', error)
     );
   }
-
 }

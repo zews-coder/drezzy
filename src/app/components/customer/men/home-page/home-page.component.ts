@@ -17,7 +17,7 @@ export class HomePageComponent {
   }
 
   viewCategory(category: string) {
-    this.router.navigate(['/shop'], { queryParams: { category } });
+    this.router.navigate([category]);
   }
 }
 

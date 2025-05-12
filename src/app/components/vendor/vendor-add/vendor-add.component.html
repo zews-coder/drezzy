@@ -2,8 +2,9 @@
 <div class="container">
   <!-- First Form (Shoes) -->
   <form [formGroup]="vendorFormShoes" (ngSubmit)="onSubmitShoes()" enctype="multipart/form-data">
+    <h3>ADD NEW SHOES</h3>
     <div class="form-group">
-      <label for="titleShoes">Add Shoes</label>
+      <label for="titleShoes">Shoes Title</label>
       <input type="text" id="titleShoes" formControlName="title" class="form-control" />
     </div>
     <div class="form-group">
@@ -39,8 +40,9 @@
 
   <!-- Second Form (Clothes) -->
   <form [formGroup]="vendorFormClothes" (ngSubmit)="onSubmitClothes()" enctype="multipart/form-data">
+    <h3>ADD NEW CLOTHES</h3>
     <div class="form-group">
-      <label for="titleClothes">Add Clothes</label>
+      <label for="titleClothes">Clothe Title</label>
       <input type="text" id="titleClothes" formControlName="title" class="form-control" />
     </div>
     <div class="form-group">

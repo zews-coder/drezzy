@@ -20,10 +20,8 @@ export class VendorLoginComponent {
   //login function
   onSubmit() {
     const url = 'http://localhost:8080/auth/user';
-    
-    if(localStorage.getItem("token") !== null){
-      localStorage.removeItem("token");
-    }
+    // const url = 'http://user-service-1:8080/auth/user';
+    // const url = 'http://user-service:8080/auth/user';
 
     if(sessionStorage.getItem("token") !== null){
       sessionStorage.removeItem("token");
@@ -33,7 +31,6 @@ export class VendorLoginComponent {
       next: (response) => {
         if (response.token) {
           sessionStorage.setItem('token', response.token);
-          localStorage.setItem('token', response.token);
           
           this.router.navigate(['/vendor-articles']);
         } else {

@@ -13,12 +13,12 @@ export interface VendorArticles {
   }
 
 export interface Bill{
-    id: Number,
+    bill_id: Number,
     customerId: Number,
     articleList: VendorArticles[];
     date: string,
     status: String,
-    price: Number,
+    price: number,
     showArticles?: boolean;
 }
 

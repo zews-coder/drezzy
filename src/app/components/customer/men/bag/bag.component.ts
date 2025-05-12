@@ -99,17 +99,14 @@ export class BagComponent implements OnInit{
   }
 
   makeBill(): void {
-    // Extract article IDs
     const articleIds = this.articles.map(article => article.id.toString());
 
-    // Create request payload
     const billRequest: BillRequest = {
       articleIds: articleIds,
       address: this.user.address,
       cardInfo: this.user.cardInfo
     };
 
-    // Send POST request
     this.http.post('http://localhost:9090/api/v1/bills/add',  billRequest, { headers: this.getAuthHeaders() })
       .subscribe({
         next: (response) => {
@@ -138,20 +135,12 @@ export class BagComponent implements OnInit{
   isFormValid(): boolean {
     const { address, cardInfo } = this.user;
     
-    // Check if all required fields are filled
     const allFieldsFilled =
       (address.street && address.city && address.state && address.zip && address.phone &&
       cardInfo.cardHolder && cardInfo.cardNumber && cardInfo.expiryDate && cardInfo.cvv) ? true : false;
-    
-    // Check card number (16 digits)
     const isCardNumberValid = /^\d{16}$/.test(cardInfo.cardNumber);
-    
-    // Check CVV (3 digits)
     const isCvvValid = /^\d{3}$/.test(cardInfo.cvv);
-    
-    // Check expiry date (5 characters in MM/YY format)
     const isExpiryDateValid = /^\d{2}\/\d{2}$/.test(cardInfo.expiryDate);
-    
     return allFieldsFilled && isCardNumberValid && isCvvValid && isExpiryDateValid;
   }
 }

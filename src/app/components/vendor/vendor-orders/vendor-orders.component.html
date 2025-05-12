@@ -14,11 +14,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let bill of bills">
-          <td>{{ bill.id }}</td>
+          <td>{{ bill.bill_id }}</td>
           <td>{{ bill.customerId }}</td>
           <td>{{ bill.status }}</td>
           <td>{{ bill.date | dateFormat}}</td>
-          <td>{{ bill.price }}</td>
+          <td>{{ bill.price | number:'1.2-2' }}</td>
           <td>
             <button *ngIf="bill.status === 'PAID'" (click)="setStatus(bill, 'SHIPPED')">Set Status SHIPPED</button>
           <td>
@@ -48,5 +48,4 @@
       </tbody>
     </table>
   </div>
-  
   

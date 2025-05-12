@@ -13,14 +13,34 @@
       </thead>
       <tbody>
         <tr *ngFor="let bill of bills">
-          <td>{{ bill.id }}</td>
+          <td>{{ bill.bill_id }}</td>
           <td>{{ bill.customerId }}</td>
           <td>{{ bill.status }}</td>
           <td>{{ bill.date | dateFormat}}</td>
-          <td>{{ bill.price }}</td>
+          <td>{{ bill.price | number:'1.2-2' }}</td>
           <td>
             <button (click)="selectBill(bill)">Details</button>
           </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Article Table shown only when a bill is selected -->
+    <table class="article-table" *ngIf="selectedBill">
+      <thead>
+        <tr>
+          <th>Article ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let article of selectedBill.articleList">
+          <td>{{ article.id }}</td>
+          <td>{{ article.title }}</td>
+          <td>{{ article.description }}</td>
+          <td>{{ article.price }}</td>
         </tr>
       </tbody>
     </table>

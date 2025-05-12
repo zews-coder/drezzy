@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'dateFormat'
 })
 export class DateFormatPipe implements PipeTransform {
-  transform(value: string): string { // Use primitive string
+  transform(value: string): string {
     if (!value) return '';
 
     // Convert to Date
@@ -13,7 +13,7 @@ export class DateFormatPipe implements PipeTransform {
 
     // Extract date parts
     const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
@@ -22,5 +22,3 @@ export class DateFormatPipe implements PipeTransform {
     return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;
   }
 }
-
-

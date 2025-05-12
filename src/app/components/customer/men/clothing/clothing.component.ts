@@ -22,6 +22,7 @@ export class ClothingComponent implements OnInit{
 
   fetchArticles(subtype: string){
     const url = "http://localhost:9090/api/v1/men/clothes?subtype="+subtype;
+    // const url = "http://shopping-service:9090/api/v1/men/clothes?subtype="+subtype;
 
     this.http.get<VendorArticles[]>(url).subscribe({
       next: (data) => {

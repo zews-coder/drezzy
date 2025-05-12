@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { VendorHomeComponent } from "../vendor-home/vendor-home.component";
 import { DateFormatPipe } from '../../../pipes/date-format.pipe'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Bill } from '../../../models/Vendor'
+import { Bill } from '../../../models/Vendor';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-vendor-history',
@@ -15,20 +16,17 @@ export class VendorHistoryComponent implements OnInit{
   bills: Bill[] = [];
   selectedBill: Bill | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.fetchBills();
   }
 
   private getAuthHeaders() {
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('token');
+    const token = this.authService.getJwt();
       return new HttpHeaders({
-        'Authorization': token ? `Bearer ${token}` : '',
-      });
-    }
-    return new HttpHeaders();
+       'Authorization': token ? `Bearer ${token}` : '',
+     });
   }
 
   fetchBills(): void {
@@ -44,6 +42,6 @@ export class VendorHistoryComponent implements OnInit{
   }  
 
   selectBill(bill: Bill): void {
-    this.selectedBill = bill;  // Set the clicked bill as selectedBill
+    this.selectedBill = bill;
   }
 }
